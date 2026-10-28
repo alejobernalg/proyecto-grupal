@@ -96,17 +96,25 @@ pytest -s tests/test_five_transitions.py
 ## CLI
 
 ```bash
-robot-exp --help
-robot-exp version
+robot-exp validate-config configs/experimento_1.yaml   # parámetros, rangos, rutas BFS y tamaño de Q-table
+robot-exp play                                         # control manual con el YAML por defecto
+robot-exp play --config configs/experimento_1.yaml --incident blocked_corridor
+robot-exp play --keys "wwwdwww"                        # secuencia de teclas sin teclado (demos, tests)
+robot-exp replay data/examples/oracle_experimento_1.json --fps 6
 ```
 
-Comandos previstos (se agregan por fases):
+Teclas de `play`: **W** avanzar · **A/D** girar · **S** retroceder · **espacio** quedarse · **Q** salir.
+La grilla muestra paredes, obstáculos, pasillo bloqueado (`XX`), balizas `1` `2` (verdes al
+visitarse), base `B`, robot `▲ ▶ ▼ ◀`, estela `·` e impactos de los rayos `•`. El panel lateral
+muestra batería, objetivo, etapa, colisiones y la recompensa del paso con su desglose.
+Cada partida se guarda en `data/episodes/` como episodio JSON (sirve de dataset).
 
-| Comando | Fase | Qué hace |
+La vista del CLI solo dibuja frames exportados por el simulador; `replay` no ejecuta el ambiente.
+
+| Comando | Fase | Estado |
 |---|---|---|
-| `robot-exp play --config configs/experimento_1.yaml` | 3 | Control manual (W/A/S/D, espacio, Q) |
-| `robot-exp replay data/episodes/<archivo>.json` | 3 | Reproduce un episodio en la terminal |
-| `robot-exp validate-config <yaml>` | 3 | Valida parámetros y rangos |
+| `robot-exp play` · `replay` · `validate-config` | 3 | listo |
+| `robot-exp play --live` | 2 | pendiente (necesita el visor) |
 | `robot-exp train --config ...` | 4 | Entrena Q-learning |
 | `robot-exp watch --model models/<archivo>` | 4 | Muestra el agente entrenado |
 | `robot-exp evaluate` | 4 | Métricas con y sin incidente |
