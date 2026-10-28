@@ -1,13 +1,7 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import {
-  basaltTexture,
-  containerTexture,
-  hazardTexture,
-  regolithTexture,
-  strataTexture,
-  textTexture,
-} from './textures.js';
+import { buildObstacle, buildPebbles } from './obstacles.js';
+import { hazardTexture, regolithTexture, textTexture } from './textures.js';
 
 // Coordenadas del simulador: x hacia el este, y hacia el sur, celdas de 1 m.
 // En three.js: x → x, y → z, y el mapa queda centrado en el origen.
@@ -19,23 +13,6 @@ export function rectCenter(map, rect, height = 0) {
   return new THREE.Vector3(rect.x + rect.w / 2 - map.size / 2, height, rect.y + rect.h / 2 - map.size / 2);
 }
 
-// En Marte: naranja = contenedor de carga, coral = meseta de arenisca, gris = bloque de basalto.
-const OBSTACLE_COLORS = { orange: '#ee8a35', coral: '#ec5f50', gray: '#9ba1aa' };
-const OBSTACLE_HEIGHTS = { orange: 1.3, coral: 1.0, gray: 1.15 };
-
-function obstacleMaterial(kind, index) {
-  if (kind === 'orange') {
-    return new THREE.MeshStandardMaterial({
-      map: containerTexture('#e2782c', `ARES-${String(index + 1).padStart(2, '0')}`),
-      roughness: 0.55,
-      metalness: 0.15,
-    });
-  }
-  if (kind === 'coral') {
-    return new THREE.MeshStandardMaterial({ map: strataTexture('#d9614a', 11 + index), roughness: 0.95 });
-  }
-  return new THREE.MeshStandardMaterial({ map: basaltTexture('#8d8884', 5 + index), roughness: 0.9 });
-}
 const BEACON_CYAN = new THREE.Color('#22d6ef');
 const BEACON_GREEN = new THREE.Color('#1fcf5c');
 
@@ -224,12 +201,11 @@ export function buildWorld(map) {
   }
 
   map.obstacles.forEach((rect, i) => {
-    const kind = OBSTACLE_COLORS[rect.kind] ? rect.kind : 'gray';
-    const h = OBSTACLE_HEIGHTS[kind] + ((i * 37) % 5) * 0.06;
-    const box = mesh(new RoundedBoxGeometry(rect.w - 0.08, h, rect.h - 0.08, 4, 0.09), obstacleMaterial(kind, i));
-    box.position.copy(rectCenter(map, rect, h / 2));
-    group.add(box);
+    const obstacle = buildObstacle(rect, i);
+    obstacle.position.add(rectCenter(map, rect));
+    group.add(obstacle);
   });
+  group.add(buildPebbles(map, (x, y) => cellCenter(map, x, y)));
 
   const blocked = (map.blocked ?? []).map((rect) => buildBlocked(map, rect));
   for (const b of blocked) group.add(b.group);

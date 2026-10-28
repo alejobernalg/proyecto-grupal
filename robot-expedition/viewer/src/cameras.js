@@ -38,8 +38,8 @@ export class CameraRig {
       this.goalPosition.set(n * 0.9, n * 0.5, n * 1.25);
       this.goalTarget.set(-0.5, 0.4, -1.4);
     } else if (this.view.id === 'top') {
-      this.goalPosition.set(0, n * 1.85, n * 0.03);
-      this.goalTarget.set(0, 0, 0);
+      this.goalPosition.set(0, n * 2.15, n * 0.12);
+      this.goalTarget.set(0, 0, 0.6);
     }
     this.controls.enabled = this.view.id !== 'follow';
     this.transitioning = this.view.id !== 'follow';

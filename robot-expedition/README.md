@@ -119,6 +119,22 @@ La vista del CLI solo dibuja frames exportados por el simulador; `replay` no eje
 | `robot-exp watch --model models/<archivo>` | 4 | Muestra el agente entrenado |
 | `robot-exp evaluate` | 4 | Métricas con y sin incidente |
 
+## Experimento 2: mapa marciano grande
+
+`configs/experimento_2.yaml` hereda de `experimento_1.yaml` y usa una sala de 24 × 24 m
+con relieve de Marte: cráteres, mesetas estratificadas, campos de rocas, dunas, un
+afloramiento de basalto y un contenedor. Para la física siguen siendo rectángulos
+infranqueables; `kind` solo cambia cómo se dibujan. La batería (240 u) y `max_steps` (700)
+crecen con el mapa. La ruta completa mide 80 m (88 m con el pasillo bloqueado).
+
+```bash
+robot-exp validate-config configs/experimento_2.yaml
+robot-exp play --config configs/experimento_2.yaml --live
+```
+
+En el visor: `examples/oracle_experimento_2.json`. Alrededor de la sala hay además un volcán
+en escudo, un escarpe de cañón, un módulo de aterrizaje y remolinos de polvo.
+
 ## Modelo base: Q-learning de A a B
 
 `configs/a_to_b.yaml` hereda de `experimento_1.yaml` (`extends`) y solo cambia la misión:

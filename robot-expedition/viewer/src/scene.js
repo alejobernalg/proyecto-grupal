@@ -25,7 +25,7 @@ export function createStage(canvas) {
   controls.enableDamping = true;
   controls.maxPolarAngle = Math.PI * 0.47;
   controls.minDistance = 4;
-  controls.maxDistance = 70;
+  controls.maxDistance = 110;
 
   const hemi = new THREE.HemisphereLight('#f6c9a4', '#6a2f1a', 1.3);
   scene.add(hemi);
@@ -64,6 +64,9 @@ export function createStage(canvas) {
   resize();
 
   function fitShadows(size) {
+    // La bruma empieza detrás de la sala para que los mapas grandes se vean nítidos.
+    scene.fog.near = size * 1.6 + 10;
+    scene.fog.far = size * 1.6 + 150;
     const half = size / 2 + 8; // incluye el hábitat junto a la sala
     const cam = sun.shadow.camera;
     cam.left = -half;
@@ -71,7 +74,7 @@ export function createStage(canvas) {
     cam.top = half;
     cam.bottom = -half;
     cam.near = 1;
-    cam.far = 60;
+    cam.far = 80;
     cam.updateProjectionMatrix();
   }
 

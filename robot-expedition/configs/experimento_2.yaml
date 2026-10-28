@@ -1,0 +1,34 @@
+# ROBOT EXPEDITION · experimento 2 · mapa marciano grande
+#
+# Hereda física, recompensa y agente de experimento_1.yaml y cambia el mapa: 24 × 24 m
+# con relieve de Marte. Para la física cada obstáculo sigue siendo un rectángulo
+# infranqueable; `kind` solo decide cómo se dibuja (cráter, meseta, rocas, duna...).
+extends: experimento_1.yaml
+experiment: experimento_2
+
+env:
+  map_size:         {value: 24,  unit: "m × m", range: [6, 40]}
+  sensor_range:     {value: 8.0, unit: "m",     range: [2.0, 15.0]}
+  battery_capacity: {value: 240, unit: "u",     range: [20, 500]}
+  max_steps:        {value: 700, unit: "pasos", range: [50, 2000]}
+
+map:
+  base: {x: 0, y: 21, w: 3, h: 3}
+  start: {x: 1, y: 22, orientation: N}
+  beacons:
+    - {id: 1, x: 21, y: 2}
+    - {id: 2, x: 20, y: 18}
+  obstacles:
+    - {x: 3,  y: 3,  w: 4, h: 4, kind: crater}      # cráter del noroeste
+    - {x: 10, y: 0,  w: 3, h: 6, kind: mesa}        # meseta pegada a la pared norte
+    - {x: 16, y: 4,  w: 2, h: 2, kind: rocks}
+    - {x: 21, y: 5,  w: 1, h: 2, kind: rocks}
+    - {x: 0,  y: 10, w: 6, h: 2, kind: dune}        # duna pegada a la pared oeste
+    - {x: 9,  y: 9,  w: 5, h: 5, kind: crater}      # gran cráter central
+    - {x: 16, y: 9,  w: 5, h: 2, kind: mesa}
+    - {x: 4,  y: 15, w: 2, h: 2, kind: rocks}
+    - {x: 10, y: 17, w: 6, h: 2, kind: dune}
+    - {x: 19, y: 13, w: 2, h: 2, kind: gray}        # afloramiento de basalto
+    - {x: 6,  y: 20, w: 2, h: 4, kind: orange}      # contenedor de carga
+    - {x: 15, y: 21, w: 3, h: 3, kind: crater}
+  blocked_corridor: {x: 21, y: 9, w: 3, h: 2}       # paso este entre la meseta y la pared

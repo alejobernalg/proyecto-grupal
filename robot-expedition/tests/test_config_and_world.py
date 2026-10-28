@@ -21,6 +21,22 @@ def test_default_config_loads(config):
     assert config.mission == "full"
 
 
+def test_experiment_2_large_mars_map():
+    from robot_expedition.agents.oracle import OracleAgent
+
+    path = DEFAULT_CONFIG_PATH.parent / "experimento_2.yaml"
+    cfg = load_config(path)
+    assert cfg.env["map_size"] == 24 and cfg.agent == load_config(DEFAULT_CONFIG_PATH).agent  # hereda el agente
+    assert {o["kind"] for o in cfg.map["obstacles"]} >= {"crater", "mesa", "rocks", "dune"}
+    for incident in (None, "blocked_corridor"):
+        env = RobotExpeditionEnv(cfg, incident=incident)
+        env.reset(seed=0)
+        agent = OracleAgent(env)
+        while not (env.terminated or env.truncated):
+            env.step(agent.act())
+        assert env.success
+
+
 def test_value_out_of_range_is_rejected(raw):
     raw["env"]["map_size"]["value"] = 50
     with pytest.raises(ConfigError, match="map_size: valor 50"):

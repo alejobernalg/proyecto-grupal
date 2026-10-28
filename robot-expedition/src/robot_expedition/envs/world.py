@@ -20,7 +20,8 @@ ORIENTATIONS = ("N", "E", "S", "O")
 # Vector unitario (dx, dy) de cada orientación.
 DIRECTIONS = ((0, -1), (1, 0), (0, 1), (-1, 0))
 TARGETS = ("beacon_1", "beacon_2", "base")
-OBSTACLE_KINDS = ("orange", "coral", "gray")
+# Solo decoración: el visor y el CLI los dibujan distinto; la física los trata igual.
+OBSTACLE_KINDS = ("orange", "coral", "gray", "crater", "mesa", "rocks", "dune")
 UNREACHABLE = -1
 
 

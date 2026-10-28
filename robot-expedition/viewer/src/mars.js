@@ -197,6 +197,122 @@ function buildHabitat(map) {
   return { group, beacon };
 }
 
+// Volcán en escudo lejano (tipo Olympus Mons): cono ancho y bajo con caldera.
+function buildVolcano() {
+  const group = new THREE.Group();
+  const flank = new THREE.MeshStandardMaterial({ color: '#94492c', roughness: 1, flatShading: true });
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(14, 62, 18, 28, 3), flank);
+  const pos = body.geometry.attributes.position;
+  const rand = seeded(77);
+  for (let i = 0; i < pos.count; i++) {
+    if (pos.getY(i) > -8.9) pos.setX(i, pos.getX(i) * (0.94 + rand() * 0.12));
+  }
+  body.geometry.computeVertexNormals();
+  const caldera = new THREE.Mesh(
+    new THREE.CylinderGeometry(10, 12, 1.2, 24),
+    new THREE.MeshStandardMaterial({ color: '#5c2716', roughness: 1 }),
+  );
+  caldera.position.y = 8.8;
+  group.add(body, caldera);
+  group.position.set(-40, 6, -150);
+  return group;
+}
+
+// Escarpe de cañón: terrazas de roca estratificada a un lado de la sala.
+function buildCanyon(clear) {
+  const group = new THREE.Group();
+  const rand = seeded(31);
+  const colors = ['#a9563a', '#b8653f', '#9b4c31', '#c2724a'];
+  for (let k = 0; k < 4; k++) {
+    const material = new THREE.MeshStandardMaterial({ color: colors[k], roughness: 1, flatShading: true });
+    for (let s = 0; s < 9; s++) {
+      const w = 14 + rand() * 8;
+      const h = 2.2 + rand() * 1.2;
+      const d = 8 + rand() * 4;
+      const block = new THREE.Mesh(new THREE.BoxGeometry(w, h, d, 2, 1, 2), material);
+      block.position.set(-70 + s * 17 + rand() * 4, h / 2 + k * 2.4 - 1, -(clear + 26 + k * 6 + rand() * 2));
+      block.rotation.y = (rand() - 0.5) * 0.15;
+      group.add(block);
+    }
+  }
+  return group;
+}
+
+// Módulo de aterrizaje con patas y aislante dorado, junto a la sala.
+function buildLander(map) {
+  const n = map.size;
+  const group = new THREE.Group();
+  const foil = new THREE.MeshStandardMaterial({ color: '#d9a441', roughness: 0.35, metalness: 0.7 });
+  const white = new THREE.MeshStandardMaterial({ color: '#e9e6df', roughness: 0.5 });
+  const metal = new THREE.MeshStandardMaterial({ color: '#8e949c', roughness: 0.4, metalness: 0.5 });
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.3, 1.0, 8), foil);
+  body.position.y = 1.5;
+  const top = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 1.1, 0.6, 8), white);
+  top.position.y = 2.3;
+  const nozzle = new THREE.Mesh(new THREE.ConeGeometry(0.45, 0.6, 12, 1, true), metal);
+  nozzle.position.y = 0.75;
+  group.add(body, top, nozzle);
+  for (let k = 0; k < 4; k++) {
+    const a = (k / 4) * Math.PI * 2 + Math.PI / 4;
+    const leg = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.9, 6), metal);
+    leg.position.set(Math.cos(a) * 1.35, 0.85, Math.sin(a) * 1.35);
+    leg.rotation.set(Math.sin(a) * 0.45, 0, -Math.cos(a) * 0.45);
+    const pad = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.3, 0.08, 10), metal);
+    pad.position.set(Math.cos(a) * 1.75, 0.04, Math.sin(a) * 1.75);
+    group.add(leg, pad);
+  }
+  group.traverse((o) => {
+    if (o.isMesh) {
+      o.castShadow = true;
+      o.receiveShadow = true;
+    }
+  });
+  group.position.set(n / 2 + 5, 0, -n / 2 + 2);
+  return group;
+}
+
+// Remolinos de polvo que cruzan el paisaje lejos de la sala.
+function buildDustDevils(clear) {
+  const devils = [];
+  const group = new THREE.Group();
+  const dot = softDotTexture();
+  for (let d = 0; d < 2; d++) {
+    const count = 260;
+    const positions = new Float32Array(count * 3);
+    const params = [];
+    for (let i = 0; i < count; i++) {
+      const y = Math.random() * 9;
+      params.push({ y, angle: Math.random() * Math.PI * 2, speed: 2 + Math.random() * 2 });
+    }
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const points = new THREE.Points(geometry, new THREE.PointsMaterial({
+      map: dot, color: '#e2a77c', size: 0.5, transparent: true, opacity: 0.35, depthWrite: false,
+    }));
+    group.add(points);
+    devils.push({ points, params, orbit: clear + 18 + d * 14, phase: d * 2.5, dir: d ? -1 : 1 });
+  }
+  return {
+    group,
+    update(time, dt) {
+      for (const devil of devils) {
+        const a = devil.phase + time * 0.03 * devil.dir;
+        const cx = Math.cos(a) * devil.orbit;
+        const cz = Math.sin(a) * devil.orbit;
+        const pos = devil.points.geometry.attributes.position;
+        devil.params.forEach((p, i) => {
+          p.angle += p.speed * dt;
+          p.y += dt * 0.8;
+          if (p.y > 9) p.y = 0;
+          const r = 0.3 + p.y * 0.28;
+          pos.setXYZ(i, cx + Math.cos(p.angle) * r, p.y, cz + Math.sin(p.angle) * r);
+        });
+        pos.needsUpdate = true;
+      }
+    },
+  };
+}
+
 function buildSky() {
   const group = new THREE.Group();
   const dot = softDotTexture();
@@ -254,13 +370,18 @@ export function buildMars(map) {
   const clear = map.size / 2 + 0.6;
   const group = new THREE.Group();
   const habitat = buildHabitat(map);
-  const dust = buildDust();
+  const dust = buildDust(600, clear + 22);
+  const devils = buildDustDevils(clear);
   group.add(
     buildTerrain(clear),
     buildMountains(rand),
     buildCraters(rand, clear + 6),
     buildRocks(rand, clear),
+    buildVolcano(),
+    buildCanyon(clear),
+    buildLander(map),
     habitat.group,
+    devils.group,
     buildSky(),
     dust.points,
   );
@@ -268,6 +389,7 @@ export function buildMars(map) {
     group,
     update(time, dt) {
       dust.update(dt, time);
+      devils.update(time, dt);
       habitat.beacon.material.emissiveIntensity = Math.sin(time * 2.5) > 0.6 ? 3 : 0.3;
     },
   };

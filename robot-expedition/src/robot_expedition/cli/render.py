@@ -15,7 +15,15 @@ from rich.text import Text
 
 FLOOR = "#c9a46a"
 WALL = "#d4d4d4"
-OBSTACLE_COLORS = {"orange": "#e07b2a", "coral": "#e5574b", "gray": "#8a8f98"}
+OBSTACLE_COLORS = {
+    "orange": "#e07b2a",
+    "coral": "#e5574b",
+    "gray": "#8a8f98",
+    "crater": "#6e3420",
+    "mesa": "#b5532f",
+    "rocks": "#5a4038",
+    "dune": "#e3a36b",
+}
 BLOCKED = "#7a1f1f"
 BASE = "#2e9e4f"
 BEACON = "#19c3d8"
