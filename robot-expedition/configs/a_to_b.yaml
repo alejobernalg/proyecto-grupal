@@ -1,0 +1,11 @@
+# ROBOT EXPEDITION · modelo base A → B
+#
+# Hereda todo de experimento_1.yaml (mismo mapa, física y recompensa anti-trampa)
+# y solo cambia la misión: ir de la salida en la base (A) a la baliza 1 (B).
+# Al llegar a B el episodio termina con éxito y paga return_bonus.
+extends: experimento_1.yaml
+experiment: a_to_b
+mission: a_to_b
+
+agent:
+  episodes: {value: 3000, unit: "episodios", range: [10, 200000]}

@@ -86,12 +86,16 @@ class RobotExpeditionEnv(gym.Env):
 
         w = self.world
         b1, b2 = w.beacons
+        self.mission = self.config.mission
         # Longitud BFS de los tramos que faltan después de alcanzar el objetivo de cada etapa.
-        self._remaining_after = (
-            w.distance("beacon_2", *b1) + w.distance("base", *b2),
-            w.distance("base", *b2),
-            0,
-        )
+        if self.mission == "a_to_b":
+            self._remaining_after = (0, 0, 0)
+        else:
+            self._remaining_after = (
+                w.distance("beacon_2", *b1) + w.distance("base", *b2),
+                w.distance("base", *b2),
+                0,
+            )
         self._check_no_farming()
 
         n = w.size
@@ -251,6 +255,10 @@ class RobotExpeditionEnv(gym.Env):
                 self.visited.append(beacon_id)
                 self.stage += 1
                 events.append(f"beacon_{beacon_id}")
+                if self.mission == "a_to_b":  # B es la baliza 1: llegar termina la misión
+                    self.success = True
+                    events.append("mission_complete")
+                    return self.rewards["beacon_bonus"], self.rewards["return_bonus"]
                 return self.rewards["beacon_bonus"], 0.0
             else:
                 events.append(f"beacon_{beacon_id}_out_of_order")
@@ -261,6 +269,8 @@ class RobotExpeditionEnv(gym.Env):
         return 0.0, 0.0
 
     def _potential(self) -> float:
+        if self.success:  # estado final: no queda recorrido
+            return 0.0
         x, y = self.pos
         return -float(self.world.distance(self.target, x, y) + self._remaining_after[self.stage])
 
@@ -392,6 +402,7 @@ class RobotExpeditionEnv(gym.Env):
             },
             "stage": self.stage,
             "target": self.target,
+            "mission": self.mission,
             "visited": list(self.visited),
             "collisions": self.collisions,
             "path_length": self.path_length,

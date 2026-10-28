@@ -119,6 +119,27 @@ La vista del CLI solo dibuja frames exportados por el simulador; `replay` no eje
 | `robot-exp watch --model models/<archivo>` | 4 | Muestra el agente entrenado |
 | `robot-exp evaluate` | 4 | Métricas con y sin incidente |
 
+## Modelo base: Q-learning de A a B
+
+`configs/a_to_b.yaml` hereda de `experimento_1.yaml` (`extends`) y solo cambia la misión:
+ir de la salida en la base (A) a la baliza 1 (B). Los hiperparámetros (α, γ, ε, episodios)
+están en la sección `agent` del YAML.
+
+```bash
+robot-exp train --config configs/a_to_b.yaml     # ~1 min; guarda checkpoints 0, 30, 150, 450, 1050, 3000
+robot-exp watch --model models/a_to_b.npz        # el agente en la terminal (añade --live para el visor)
+robot-exp watch --model models/a_to_b_ep00150.npz  # un checkpoint temprano: todavía no sabe llegar
+robot-exp evaluate --model models/a_to_b.npz     # con y sin incidente
+```
+
+Cada entrenamiento guarda en `data/runs/<fecha>_<exp>/` la config usada, el commit (`run.json`),
+las métricas por episodio (`metrics.csv`) y un episodio por checkpoint; esos episodios también
+se copian a `data/episodes/` para verlos en el visor, donde el personaje camina más torpe
+cuanto menos entrenado está el modelo.
+
+Resultado del baseline (3000 episodios): llega a B sin choques en 28 m (la ruta óptima mide
+18 m). Con el pasillo bloqueado falla: aprendió una sola ruta y no se adapta.
+
 ## Visor three.js (Marte)
 
 Diorama 3D ambientado en Marte: regolito, dunas, montañas y mesetas con bruma, cráteres,

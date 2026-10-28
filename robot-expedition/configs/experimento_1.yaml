@@ -9,6 +9,9 @@ experiment: experimento_1
 # Incidente para "cambiar las condiciones": null (ninguno) o blocked_corridor.
 incident: null
 
+# Misión: full (base → 1 → 2 → base) o a_to_b (salida → baliza 1).
+mission: full
+
 env:
   map_size:              {value: 12,   unit: "m × m",    range: [6, 40]}      # lado de la sala; cada celda mide 1 m
   corridor_width:        {value: 2,    unit: "m",        range: [1, 4]}       # separación mínima entre obstáculos y con las paredes
@@ -34,6 +37,16 @@ reward:
 
 wrapper:
   battery_levels: {value: 4, unit: "niveles", range: [1, 10]}  # k niveles de batería en DiscreteStateWrapper
+
+# Q-learning tabular sobre DiscreteStateWrapper.
+agent:
+  alpha:                  {value: 0.2,   unit: "adim",      range: [0.01, 1.0]}
+  gamma:                  {value: 0.99,  unit: "adim",      range: [0.8, 1.0]}
+  epsilon_start:          {value: 1.0,   unit: "adim",      range: [0.0, 1.0]}
+  epsilon_end:            {value: 0.05,  unit: "adim",      range: [0.0, 1.0]}
+  epsilon_decay_fraction: {value: 0.8,   unit: "adim",      range: [0.05, 1.0]}
+  episodes:               {value: 8000,  unit: "episodios", range: [10, 200000]}
+  seed:                   {value: 0,     unit: "adim",      range: [0, 1000000]}
 
 # Mapa. Coordenadas en celdas: x crece hacia el este, y hacia el sur; (0, 0) es la esquina noroeste.
 map:

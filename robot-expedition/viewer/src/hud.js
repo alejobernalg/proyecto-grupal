@@ -42,6 +42,7 @@ export class Hud {
     this.scrubbing = false;
     this.el = {
       episode: $('hud-episode'),
+      model: $('hud-model'),
       step: $('hud-step'),
       total: $('hud-total'),
       reward: $('hud-reward'),
@@ -141,6 +142,11 @@ export class Hud {
   setEpisode(label, episode) {
     this.cache.clear();
     this.el.episode.textContent = `${episode.experiment} · ${label}`;
+    const meta = episode.metadata ?? {};
+    this.el.model.textContent =
+      meta.agent === 'q_learning'
+        ? `Q-learning ${meta.trained_episodes}/${meta.total_episodes}`
+        : { human: 'manual (CLI)', oracle: 'oracle (BFS)' }[meta.agent] ?? '—';
     this.el.timeline.max = String(Math.max(0, episode.frames.length - 1));
   }
 

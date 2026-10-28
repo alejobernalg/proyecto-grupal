@@ -22,6 +22,8 @@ import yaml
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG_PATH = PROJECT_ROOT / "configs" / "experimento_1.yaml"
 INCIDENTS = (None, "blocked_corridor")
+# full: base → baliza 1 → baliza 2 → base. a_to_b: de la salida (A) a la baliza 1 (B).
+MISSIONS = ("full", "a_to_b")
 
 
 class ConfigError(ValueError):
@@ -69,6 +71,15 @@ PARAM_SPECS: dict[str, dict[str, ParamSpec]] = {
     "wrapper": {
         "battery_levels": ParamSpec(int, "niveles", 1, 100, "Niveles k de batería en DiscreteStateWrapper"),
     },
+    "agent": {
+        "alpha": ParamSpec(float, "adim", 0.0, 1.0, "Tasa de aprendizaje α de Q-learning"),
+        "gamma": ParamSpec(float, "adim", 0.0, 1.0, "Factor de descuento γ del agente"),
+        "epsilon_start": ParamSpec(float, "adim", 0.0, 1.0, "ε inicial de ε-greedy"),
+        "epsilon_end": ParamSpec(float, "adim", 0.0, 1.0, "ε final de ε-greedy"),
+        "epsilon_decay_fraction": ParamSpec(float, "adim", 0.0, 1.0, "Fracción de episodios en que ε baja linealmente"),
+        "episodes": ParamSpec(int, "episodios", 1, 1_000_000, "Episodios de entrenamiento"),
+        "seed": ParamSpec(int, "adim", 0, 2**31 - 1, "Semilla del entrenamiento"),
+    },
 }
 
 
@@ -80,8 +91,10 @@ class ExperimentConfig:
     env: dict[str, Any]
     reward: dict[str, Any]
     wrapper: dict[str, Any]
+    agent: dict[str, Any]
     map: dict[str, Any]
     incident: str | None
+    mission: str
     raw: dict[str, Any]
     source: Path | None = None
 
@@ -114,9 +127,7 @@ def load_config(source: str | Path | Mapping[str, Any] | ExperimentConfig | None
     path: Path | None = None
     if isinstance(source, (str, Path)):
         path = Path(source)
-        if not path.exists():
-            raise ConfigError(f"No existe el archivo de configuración: {path}")
-        raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        raw = _read_yaml(path)
     else:
         raw = deepcopy(dict(source))
     if not isinstance(raw, dict):
@@ -131,6 +142,9 @@ def load_config(source: str | Path | Mapping[str, Any] | ExperimentConfig | None
     incident = raw.get("incident")
     if incident not in INCIDENTS:
         errors.append(f"incident: '{incident}' no es válido; opciones: {INCIDENTS}")
+    mission = raw.setdefault("mission", "full")
+    if mission not in MISSIONS:
+        errors.append(f"mission: '{mission}' no es válida; opciones: {MISSIONS}")
     map_cfg = raw.get("map")
     if not isinstance(map_cfg, dict):
         errors.append("map: falta la sección del mapa")
@@ -142,11 +156,39 @@ def load_config(source: str | Path | Mapping[str, Any] | ExperimentConfig | None
         env=values["env"],
         reward=values["reward"],
         wrapper=values["wrapper"],
+        agent=values["agent"],
         map=map_cfg,
         incident=incident,
+        mission=mission,
         raw=raw,
         source=path,
     )
+
+
+def _read_yaml(path: Path, seen: tuple[Path, ...] = ()) -> dict[str, Any]:
+    """Lee un YAML. Con ``extends: otro.yaml`` hereda de ese archivo y sobrescribe solo lo que declara."""
+    if not path.exists():
+        raise ConfigError(f"No existe el archivo de configuración: {path}")
+    if path.resolve() in seen:
+        raise ConfigError(f"extends circular en {path}")
+    raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    if not isinstance(raw, dict):
+        raise ConfigError(f"{path}: el YAML debe ser un diccionario en la raíz")
+    parent = raw.pop("extends", None)
+    if parent is None:
+        return raw
+    base = _read_yaml(path.parent / parent, (*seen, path.resolve()))
+    return _deep_merge(base, raw)
+
+
+def _deep_merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
+    merged = deepcopy(base)
+    for key, value in override.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = _deep_merge(merged[key], value)
+        else:
+            merged[key] = deepcopy(value)
+    return merged
 
 
 def _is_number(value: Any) -> bool:

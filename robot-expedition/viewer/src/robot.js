@@ -92,30 +92,42 @@ export function createExplorer() {
   let phase = 0;
   let stepping = 0; // 0 quieto, 1 caminando
   let blinkTimer = 2;
+  let clumsy = 0; // 0 camina con soltura, 1 recién empieza a aprender
+
+  // Torpeza visual según cuánto entrenó el modelo (metadata del episodio). Solo dibujo.
+  function setClumsiness(value) {
+    clumsy = Math.max(0, Math.min(1, value));
+  }
 
   // distance: metros recorridos con signo (negativo = retroceso); turn: grados girados este frame.
   function animate(dt, distance, turn, time) {
+    const c = clumsy;
     const turning = Math.abs(turn) / 90; // un giro de 90° equivale a un paso corto
-    phase += (distance / STRIDE) * Math.PI + Math.sign(turn || 1) * turning * Math.PI;
+    const stride = STRIDE * (1 - 0.35 * c); // pasos más cortos y nerviosos al principio
+    phase += (distance / stride) * Math.PI + Math.sign(turn || 1) * turning * Math.PI;
     const active = Math.abs(distance) > 1e-4 || turning > 1e-4;
     stepping += ((active ? 1 : 0) - stepping) * (1 - Math.exp(-dt * 10));
 
+    const wobble = Math.sin(time * 7.3) * Math.sin(time * 3.1 + 1.7); // temblor irregular
     const swingAmp = 0.55 * stepping;
     for (const leg of legs) {
       const p = phase + (leg.side > 0 ? Math.PI : 0);
-      const swing = Math.sin(p);
-      leg.hip.rotation.x = swing * swingAmp;
-      // La rodilla se dobla cuando la pierna va hacia adelante en el aire.
-      leg.knee.rotation.x = -Math.max(0, Math.cos(p)) * 0.95 * stepping;
+      // Con torpeza: zancadas desiguales, rodillas rígidas y piernas abiertas para no caerse.
+      const uneven = 1 + 0.7 * c * Math.sin(p * 0.5 + leg.side);
+      leg.hip.rotation.x = Math.sin(p) * swingAmp * uneven;
+      leg.hip.rotation.z = leg.side * c * (0.1 + 0.08 * stepping);
+      leg.knee.rotation.x = -Math.max(0, Math.cos(p)) * 0.95 * stepping * (1 - 0.6 * c);
       leg.ankle.rotation.x = -leg.hip.rotation.x - leg.knee.rotation.x;
     }
-    const bob = Math.abs(Math.sin(phase)) * 0.045 * stepping;
+    const bob = Math.abs(Math.sin(phase)) * (0.045 + 0.04 * c) * stepping;
     const breathe = Math.sin(time * 2.2) * 0.008 * (1 - stepping);
     torso.position.y = bob + breathe;
     pelvis.position.y = HIP_HEIGHT + 0.06 + bob * 0.6;
     for (const leg of legs) leg.hip.position.y = HIP_HEIGHT + bob * 0.6;
-    torso.rotation.x = -0.08 * stepping * Math.sign(distance || 1); // se inclina hacia donde camina
-    torso.rotation.z = Math.sin(phase) * 0.05 * stepping;
+    // Se inclina hacia donde camina; si es torpe además se bambolea y tiembla.
+    torso.rotation.x = -0.08 * stepping * Math.sign(distance || 1) + c * 0.12 * wobble;
+    torso.rotation.z =
+      Math.sin(phase) * (0.05 + 0.12 * c) * stepping + c * (0.12 * Math.sin(time * 1.9) * (0.4 + stepping) + 0.07 * wobble);
 
     // Parpadeo.
     blinkTimer -= dt;
@@ -131,5 +143,5 @@ export function createExplorer() {
     return legs.map((leg) => leg.ankle.getWorldPosition(tmp.clone()));
   }
 
-  return { root, body, animate, feet };
+  return { root, body, animate, feet, setClumsiness };
 }

@@ -17,7 +17,8 @@ def test_default_config_loads(config):
     assert config.name == "experimento_1"
     assert config.env["map_size"] == 12
     assert config.incident is None
-    assert len(config.param_rows()) == 20
+    assert len(config.param_rows()) == 27
+    assert config.mission == "full"
 
 
 def test_value_out_of_range_is_rejected(raw):

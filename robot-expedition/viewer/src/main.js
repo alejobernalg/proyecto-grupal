@@ -95,6 +95,9 @@ function loadEpisode(data, label) {
   centers = data.frames.map((f) => cellCenter(data.map, f.robot.x, f.robot.y));
   player.load(data);
   robot.root.visible = true;
+  // Un modelo con poco entrenamiento camina torpe; el humano y el oracle caminan normal.
+  const meta = data.metadata ?? {};
+  robot.setClumsiness(meta.agent === 'q_learning' ? 1 - (meta.training_progress ?? 1) : 0);
   lastDisplay = 0;
   lastRobotPos.copy(centers[0]);
   lastHeading = data.frames[0].robot.heading_deg;
