@@ -10,7 +10,7 @@ import { Hud } from './hud.js';
 import { connectLive } from './live.js';
 import { WheelDust, buildMars } from './mars.js';
 import { Player, easeInOut, lerpAngleDeg } from './player.js';
-import { WHEEL_RADIUS, createRobot } from './robot.js';
+import { createExplorer } from './robot.js';
 import { createStage } from './scene.js';
 import { buildWorld, cellCenter, disposeObject } from './world.js';
 
@@ -19,7 +19,7 @@ const EPISODE_FORMAT = 'robot-expedition/episode@1';
 const stage = createStage(document.getElementById('scene'));
 const player = new Player();
 const rig = new CameraRig(stage.camera, stage.controls);
-const robot = createRobot();
+const robot = createExplorer();
 const rays = new Rays();
 const trail = new Trail();
 const guide = new GuideLine();
@@ -36,6 +36,7 @@ let centers = [];
 let lastDisplay = 0;
 let guidesOn = true;
 let lastRobotPos = new THREE.Vector3();
+let lastHeading = 0;
 
 const hud = new Hud({
   togglePlay: () => player.toggle(),
@@ -96,6 +97,7 @@ function loadEpisode(data, label) {
   robot.root.visible = true;
   lastDisplay = 0;
   lastRobotPos.copy(centers[0]);
+  lastHeading = data.frames[0].robot.heading_deg;
   rig.setSize(data.map.size);
   rig.setView(rig.index, true);
   hud.setEpisode(label, data);
@@ -235,19 +237,17 @@ function animate() {
   robot.body.position.set(0, Math.abs(Math.sin(Math.PI * 2 * alpha)) * 0.05 * bump, -0.16 * bump);
   robot.body.rotation.x = 0.12 * bump;
 
-  // Ruedas: giran según el avance real del dibujo.
+  // Caminar: el ciclo de pasos sigue al desplazamiento y al giro dibujados.
   const moved = pos.distanceTo(lastRobotPos);
   const forward = compassVector(heading);
   const sign = Math.sign(forward.dot(pos.clone().sub(lastRobotPos))) || 1;
-  for (const wheel of robot.wheels) wheel.rotation.x -= (sign * moved) / WHEEL_RADIUS;
-  if (moved > 0.002) {
-    const side = new THREE.Vector3(-forward.z, 0, forward.x).multiplyScalar(0.34);
-    const rear = pos.clone().addScaledVector(forward, -0.25 * sign);
-    wheelDust.emit(rear.clone().add(side), 1);
-    wheelDust.emit(rear.clone().sub(side), 1);
+  const turned = ((((heading - lastHeading) % 360) + 540) % 360) - 180;
+  robot.animate(dt, sign * moved, turned, time);
+  if (moved > 0.002 && Math.random() < 0.6) {
+    for (const foot of robot.feet()) wheelDust.emit(foot, 1);
   }
   lastRobotPos.copy(pos);
-  robot.antennaTip.material.emissiveIntensity = 1.8 + Math.sin(time * 5) * 0.8;
+  lastHeading = heading;
 
   // Rayos, estela y guía.
   rays.update(pos, heading, interpolatedRays(from, to, e));

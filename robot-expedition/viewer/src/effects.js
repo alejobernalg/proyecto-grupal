@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-const SENSOR_HEIGHT = 0.42;
+const SENSOR_HEIGHT = 0.8; // a la altura del visor
 
 // Dirección en el plano para un rumbo en grados de brújula (0 = norte = −z, 90 = este = +x).
 export function compassVector(deg) {

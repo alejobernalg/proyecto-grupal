@@ -1,78 +1,135 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { solarPanelTexture } from './textures.js';
 
-export const WHEEL_RADIUS = 0.15;
+const STRIDE = 0.5; // m por paso: un ciclo completo (dos pasos) por celda
+const HIP_HEIGHT = 0.44;
 
-// Robot low-poly: chasis blanco, ruedas oscuras, cabeza de sensores y antena.
-// Mira hacia −z cuando rotation.y = 0 (norte en el simulador).
-export function createRobot() {
+// Explorador bípedo: cuerpo ovalado, visor con ojos, antena, mochila y dos piernas.
+// Mira hacia −z cuando rotation.y = 0 (norte en el simulador). Solo es dibujo:
+// la animación de caminar se deriva del desplazamiento que ya exportó el simulador.
+export function createExplorer() {
   const root = new THREE.Group();
-  const body = new THREE.Group(); // recibe el rebote al chocar sin mover la posición lógica
+  const body = new THREE.Group(); // tambaleo al chocar sin mover la posición lógica
+  const torso = new THREE.Group(); // balanceo y respiración
   root.add(body);
+  body.add(torso);
 
   const shadow = (m) => {
     m.castShadow = true;
     m.receiveShadow = true;
     return m;
   };
-  const white = new THREE.MeshStandardMaterial({ color: '#f2efe8', roughness: 0.45 });
-  const trim = new THREE.MeshStandardMaterial({ color: '#cfcac0', roughness: 0.6 });
-  const dark = new THREE.MeshStandardMaterial({ color: '#262b33', roughness: 0.55 });
-  const tire = new THREE.MeshStandardMaterial({ color: '#1d2026', roughness: 0.85 });
-  const hub = new THREE.MeshStandardMaterial({ color: '#9aa1ab', roughness: 0.4, metalness: 0.3 });
-  const eye = new THREE.MeshStandardMaterial({ color: '#7ff4ff', emissive: '#3fe6ff', emissiveIntensity: 3 });
-  const tip = new THREE.MeshStandardMaterial({ color: '#ff7a4d', emissive: '#ff5a2a', emissiveIntensity: 2.5 });
+  const shell = new THREE.MeshStandardMaterial({ color: '#f4f1ea', roughness: 0.4 });
+  const joint = new THREE.MeshStandardMaterial({ color: '#3a414b', roughness: 0.55 });
+  const visorMat = new THREE.MeshStandardMaterial({ color: '#12202c', roughness: 0.15, metalness: 0.6 });
+  const accent = new THREE.MeshStandardMaterial({ color: '#e2782c', roughness: 0.5 });
+  const eyeMat = new THREE.MeshStandardMaterial({ color: '#8ff6ff', emissive: '#3fe6ff', emissiveIntensity: 3 });
+  const tipMat = new THREE.MeshStandardMaterial({ color: '#ff7a4d', emissive: '#ff5a2a', emissiveIntensity: 2.5 });
 
-  const chassis = shadow(new THREE.Mesh(new RoundedBoxGeometry(0.6, 0.24, 0.72, 3, 0.07), white));
-  chassis.position.y = 0.27;
-  const deck = shadow(new THREE.Mesh(new RoundedBoxGeometry(0.46, 0.08, 0.44, 2, 0.03), trim));
-  deck.position.set(0, 0.42, 0.07);
-  const bumper = shadow(new THREE.Mesh(new RoundedBoxGeometry(0.5, 0.08, 0.06, 2, 0.02), dark));
-  bumper.position.set(0, 0.2, -0.38);
+  // Cuerpo: huevo blanco con cinturón naranja.
+  const egg = shadow(new THREE.Mesh(new THREE.SphereGeometry(0.27, 28, 20), shell));
+  egg.scale.set(1, 1.18, 0.95);
+  egg.position.y = 0.76;
+  const belt = shadow(new THREE.Mesh(new THREE.TorusGeometry(0.255, 0.025, 8, 32), accent));
+  belt.rotation.x = Math.PI / 2;
+  belt.position.y = 0.6;
+  const pelvis = shadow(new THREE.Mesh(new RoundedBoxGeometry(0.34, 0.1, 0.22, 2, 0.04), joint));
+  pelvis.position.y = HIP_HEIGHT + 0.06;
 
-  const neck = shadow(new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.14, 10), dark));
-  neck.position.set(0, 0.48, -0.14);
-  const head = shadow(new THREE.Mesh(new RoundedBoxGeometry(0.3, 0.17, 0.16, 2, 0.04), dark));
-  head.position.set(0, 0.6, -0.16);
-  for (const x of [-0.07, 0.07]) {
-    const e = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.05, 0.02), eye);
-    e.position.set(x, 0.61, -0.245);
-    body.add(e);
+  // Visor y ojos.
+  const visor = shadow(new THREE.Mesh(new THREE.SphereGeometry(0.2, 24, 12, Math.PI * 0.2, Math.PI * 0.6, Math.PI * 0.28, Math.PI * 0.3), visorMat));
+  visor.rotation.y = Math.PI / 2;
+  visor.scale.set(1.08, 1.05, 1.15);
+  visor.position.set(0, 0.8, -0.04);
+  const eyes = [];
+  for (const x of [-0.065, 0.065]) {
+    const eye = new THREE.Mesh(new THREE.CapsuleGeometry(0.022, 0.03, 4, 8), eyeMat);
+    eye.position.set(x, 0.84, -0.255);
+    eyes.push(eye);
+    torso.add(eye);
   }
 
-  const antenna = shadow(new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.36, 6), dark));
-  antenna.position.set(0.17, 0.62, 0.2);
-  const antennaTip = new THREE.Mesh(new THREE.SphereGeometry(0.04, 12, 8), tip);
-  antennaTip.position.set(0.17, 0.81, 0.2);
+  // Antena y mochila.
+  const antenna = shadow(new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.22, 6), joint));
+  antenna.position.set(0.08, 1.15, 0.05);
+  antenna.rotation.z = -0.25;
+  const antennaTip = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 8), tipMat);
+  antennaTip.position.set(0.108, 1.26, 0.05);
+  const pack = shadow(new THREE.Mesh(new RoundedBoxGeometry(0.3, 0.32, 0.14, 3, 0.05), shell));
+  pack.position.set(0, 0.76, 0.26);
+  const packStripe = new THREE.Mesh(new THREE.BoxGeometry(0.31, 0.04, 0.145), accent);
+  packStripe.position.set(0, 0.84, 0.26);
 
-  // Panel solar sobre la cubierta y mástil de cámara, estilo rover.
-  const panel = shadow(new THREE.Mesh(
-    new THREE.BoxGeometry(0.52, 0.025, 0.36),
-    new THREE.MeshStandardMaterial({ map: solarPanelTexture(), roughness: 0.3, metalness: 0.5 }),
-  ));
-  panel.position.set(0, 0.475, 0.12);
-  const mastCam = shadow(new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.22, 8), dark));
-  mastCam.position.set(-0.17, 0.57, 0.24);
-  const camBox = shadow(new THREE.Mesh(new RoundedBoxGeometry(0.1, 0.07, 0.08, 2, 0.015), white));
-  camBox.position.set(-0.17, 0.7, 0.22);
+  torso.add(egg, belt, visor, antenna, antennaTip, pack, packStripe);
+  body.add(pelvis);
 
-  body.add(chassis, deck, bumper, neck, head, antenna, antennaTip, panel, mastCam, camBox);
+  // Piernas: cadera → muslo → rodilla → espinilla → pie.
+  const legs = [];
+  const thighGeo = new THREE.CapsuleGeometry(0.055, 0.12, 4, 10);
+  const shinGeo = new THREE.CapsuleGeometry(0.048, 0.12, 4, 10);
+  const footGeo = new RoundedBoxGeometry(0.13, 0.06, 0.21, 2, 0.025);
+  for (const side of [-1, 1]) {
+    const hip = new THREE.Group();
+    hip.position.set(side * 0.11, HIP_HEIGHT, 0);
+    const thigh = shadow(new THREE.Mesh(thighGeo, shell));
+    thigh.position.y = -0.1;
+    const knee = new THREE.Group();
+    knee.position.y = -0.2;
+    const kneeCap = shadow(new THREE.Mesh(new THREE.SphereGeometry(0.052, 12, 8), joint));
+    const shin = shadow(new THREE.Mesh(shinGeo, joint));
+    shin.position.y = -0.1;
+    const ankle = new THREE.Group();
+    ankle.position.y = -0.2;
+    const foot = shadow(new THREE.Mesh(footGeo, accent));
+    foot.position.set(0, -0.01, -0.04);
+    ankle.add(foot);
+    knee.add(kneeCap, shin, ankle);
+    hip.add(thigh, knee);
+    body.add(hip);
+    legs.push({ hip, knee, ankle, side });
+  }
 
-  const wheels = [];
-  const tireGeo = new THREE.CylinderGeometry(WHEEL_RADIUS, WHEEL_RADIUS, 0.1, 22);
-  tireGeo.rotateZ(Math.PI / 2);
-  const hubGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.11, 12);
-  hubGeo.rotateZ(Math.PI / 2);
-  for (const x of [-0.34, 0.34]) {
-    for (const z of [-0.23, 0.23]) {
-      const wheel = new THREE.Group();
-      wheel.add(shadow(new THREE.Mesh(tireGeo, tire)), new THREE.Mesh(hubGeo, hub));
-      wheel.position.set(x, WHEEL_RADIUS, z);
-      body.add(wheel);
-      wheels.push(wheel);
+  let phase = 0;
+  let stepping = 0; // 0 quieto, 1 caminando
+  let blinkTimer = 2;
+
+  // distance: metros recorridos con signo (negativo = retroceso); turn: grados girados este frame.
+  function animate(dt, distance, turn, time) {
+    const turning = Math.abs(turn) / 90; // un giro de 90° equivale a un paso corto
+    phase += (distance / STRIDE) * Math.PI + Math.sign(turn || 1) * turning * Math.PI;
+    const active = Math.abs(distance) > 1e-4 || turning > 1e-4;
+    stepping += ((active ? 1 : 0) - stepping) * (1 - Math.exp(-dt * 10));
+
+    const swingAmp = 0.55 * stepping;
+    for (const leg of legs) {
+      const p = phase + (leg.side > 0 ? Math.PI : 0);
+      const swing = Math.sin(p);
+      leg.hip.rotation.x = swing * swingAmp;
+      // La rodilla se dobla cuando la pierna va hacia adelante en el aire.
+      leg.knee.rotation.x = -Math.max(0, Math.cos(p)) * 0.95 * stepping;
+      leg.ankle.rotation.x = -leg.hip.rotation.x - leg.knee.rotation.x;
     }
+    const bob = Math.abs(Math.sin(phase)) * 0.045 * stepping;
+    const breathe = Math.sin(time * 2.2) * 0.008 * (1 - stepping);
+    torso.position.y = bob + breathe;
+    pelvis.position.y = HIP_HEIGHT + 0.06 + bob * 0.6;
+    for (const leg of legs) leg.hip.position.y = HIP_HEIGHT + bob * 0.6;
+    torso.rotation.x = -0.08 * stepping * Math.sign(distance || 1); // se inclina hacia donde camina
+    torso.rotation.z = Math.sin(phase) * 0.05 * stepping;
+
+    // Parpadeo.
+    blinkTimer -= dt;
+    const blink = blinkTimer < 0.12 ? 0.15 : 1;
+    if (blinkTimer < 0) blinkTimer = 2 + Math.random() * 3;
+    for (const eye of eyes) eye.scale.y = blink;
+    antennaTip.material.emissiveIntensity = 1.8 + Math.sin(time * 5) * 0.8;
   }
 
-  return { root, body, wheels, antennaTip };
+  // Posiciones de los pies en coordenadas del mundo (para el polvo).
+  const tmp = new THREE.Vector3();
+  function feet() {
+    return legs.map((leg) => leg.ankle.getWorldPosition(tmp.clone()));
+  }
+
+  return { root, body, animate, feet };
 }
