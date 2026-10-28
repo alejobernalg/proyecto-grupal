@@ -1,0 +1,53 @@
+# ROBOT EXPEDITION · experimento 1
+#
+# Todos los parámetros del experimento viven aquí, en un solo lugar.
+# Formato de cada parámetro: {value, unit, range: [mín, máx]}.
+# Al cargar se valida la unidad, que el rango quepa en los límites del simulador
+# y que el valor esté dentro del rango. Son propuestas por calibrar.
+experiment: experimento_1
+
+# Incidente para "cambiar las condiciones": null (ninguno) o blocked_corridor.
+incident: null
+
+env:
+  map_size:              {value: 12,   unit: "m × m",    range: [6, 40]}      # lado de la sala; cada celda mide 1 m
+  corridor_width:        {value: 2,    unit: "m",        range: [1, 4]}       # separación mínima entre obstáculos y con las paredes
+  max_speed:             {value: 1,    unit: "m/s",      range: [1, 2]}       # celdas por paso al avanzar (1 paso = 1 s)
+  distance_noise_std:    {value: 0.05, unit: "m",        range: [0.0, 0.5]}   # ruido gaussiano de los rayos
+  sensor_range:          {value: 6.0,  unit: "m",        range: [2.0, 15.0]}  # alcance de los 9 rayos
+  battery_capacity:      {value: 100,  unit: "u",        range: [20, 500]}
+  battery_cost_forward:  {value: 1.0,  unit: "u/acción", range: [0.0, 5.0]}
+  battery_cost_backward: {value: 1.2,  unit: "u/acción", range: [0.0, 5.0]}
+  battery_cost_turn:     {value: 0.5,  unit: "u/acción", range: [0.0, 5.0]}
+  battery_cost_stay:     {value: 0.1,  unit: "u/acción", range: [0.0, 5.0]}
+  max_steps:             {value: 300,  unit: "pasos",    range: [50, 2000]}
+
+reward:
+  progress_weight:   {value: 1.0,  unit: "pts/m",      range: [0.0, 5.0]}    # peso del shaping por potencial
+  shaping_gamma:     {value: 1.0,  unit: "adim",       range: [0.9, 1.0]}    # γ de r = γ·Φ(s') − Φ(s)
+  beacon_bonus:      {value: 10.0, unit: "pts",        range: [0.0, 100.0]}  # solo primera visita y en orden
+  return_bonus:      {value: 50.0, unit: "pts",        range: [0.0, 500.0]}  # volver a la base con ambas balizas
+  time_penalty:      {value: 0.05, unit: "pts/paso",   range: [0.0, 1.0]}
+  battery_penalty:   {value: 0.02, unit: "pts/u",      range: [0.0, 1.0]}    # por unidad de batería consumida
+  collision_penalty: {value: 1.0,  unit: "pts/choque", range: [0.0, 10.0]}
+  depletion_penalty: {value: 20.0, unit: "pts",        range: [0.0, 200.0]}  # batería agotada sin terminar
+
+wrapper:
+  battery_levels: {value: 4, unit: "niveles", range: [1, 10]}  # k niveles de batería en DiscreteStateWrapper
+
+# Mapa. Coordenadas en celdas: x crece hacia el este, y hacia el sur; (0, 0) es la esquina noroeste.
+map:
+  seed: null          # null = mapa fijo de abajo; entero = mapa aleatorio válido generado con esa semilla
+  num_obstacles: 6    # solo se usa con mapas aleatorios
+  base: {x: 0, y: 10, w: 3, h: 2}
+  start: {x: 1, y: 10, orientation: N}
+  beacons:
+    - {id: 1, x: 10, y: 1}
+    - {id: 2, x: 10, y: 9}
+  obstacles:          # kind es solo para el visor; la física lo ignora
+    - {x: 2, y: 2, w: 2, h: 2, kind: orange}
+    - {x: 6, y: 0, w: 2, h: 4, kind: gray}
+    - {x: 0, y: 6, w: 4, h: 1, kind: gray}
+    - {x: 7, y: 6, w: 3, h: 1, kind: orange}
+    - {x: 4, y: 9, w: 2, h: 3, kind: coral}
+  blocked_corridor: {x: 10, y: 6, w: 2, h: 1}  # pasillo este (baliza 1 → baliza 2) que cierra el incidente

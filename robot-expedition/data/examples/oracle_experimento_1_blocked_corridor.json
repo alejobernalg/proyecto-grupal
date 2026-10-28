@@ -1,0 +1,8158 @@
+{
+ "format": "robot-expedition/episode@1",
+ "experiment": "experimento_1",
+ "created": "2026-10-28T17:11:34",
+ "actions": [
+  "avanzar",
+  "girar_izquierda",
+  "girar_derecha",
+  "retroceder",
+  "quedarse"
+ ],
+ "map": {
+  "size": 12,
+  "cell_size_m": 1.0,
+  "axes": "x hacia el este, y hacia el sur; (0, 0) = esquina noroeste",
+  "obstacles": [
+   {
+    "x": 2,
+    "y": 2,
+    "w": 2,
+    "h": 2,
+    "kind": "orange"
+   },
+   {
+    "x": 6,
+    "y": 0,
+    "w": 2,
+    "h": 4,
+    "kind": "gray"
+   },
+   {
+    "x": 0,
+    "y": 6,
+    "w": 4,
+    "h": 1,
+    "kind": "gray"
+   },
+   {
+    "x": 7,
+    "y": 6,
+    "w": 3,
+    "h": 1,
+    "kind": "orange"
+   },
+   {
+    "x": 4,
+    "y": 9,
+    "w": 2,
+    "h": 3,
+    "kind": "coral"
+   }
+  ],
+  "blocked": [
+   {
+    "x": 10,
+    "y": 6,
+    "w": 2,
+    "h": 1,
+    "kind": "blocked"
+   }
+  ],
+  "base": {
+   "x": 0,
+   "y": 10,
+   "w": 3,
+   "h": 2,
+   "kind": "base"
+  },
+  "beacons": [
+   {
+    "id": 1,
+    "x": 10,
+    "y": 1
+   },
+   {
+    "id": 2,
+    "x": 10,
+    "y": 9
+   }
+  ],
+  "start": {
+   "x": 1,
+   "y": 10,
+   "orientation": "N"
+  },
+  "incident": "blocked_corridor",
+  "seed": null
+ },
+ "params": {
+  "env": {
+   "map_size": 12,
+   "corridor_width": 2,
+   "max_speed": 1,
+   "distance_noise_std": 0.05,
+   "sensor_range": 6.0,
+   "battery_capacity": 100.0,
+   "battery_cost_forward": 1.0,
+   "battery_cost_backward": 1.2,
+   "battery_cost_turn": 0.5,
+   "battery_cost_stay": 0.1,
+   "max_steps": 300
+  },
+  "reward": {
+   "progress_weight": 1.0,
+   "shaping_gamma": 1.0,
+   "beacon_bonus": 10.0,
+   "return_bonus": 50.0,
+   "time_penalty": 0.05,
+   "battery_penalty": 0.02,
+   "collision_penalty": 1.0,
+   "depletion_penalty": 20.0
+  }
+ },
+ "metadata": {
+  "agent": "oracle",
+  "incident": "blocked_corridor"
+ },
+ "frames": [
+  {
+   "step": 0,
+   "robot": {
+    "x": 1,
+    "y": 10,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 0,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 1.481,
+     "hit": true,
+     "end": [
+      0.019,
+      10.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.618,
+     "hit": true,
+     "end": [
+      0.005,
+      9.881
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.157,
+     "hit": true,
+     "end": [
+      -0.025,
+      8.975
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.78,
+     "hit": true,
+     "end": [
+      0.053,
+      7.008
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 3.498,
+     "hit": true,
+     "end": [
+      1.5,
+      7.002
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.793,
+     "hit": true,
+     "end": [
+      2.952,
+      6.996
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      5.743,
+      6.257
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.772,
+     "hit": true,
+     "end": [
+      4.061,
+      9.439
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.44,
+     "hit": true,
+     "end": [
+      3.94,
+      10.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 100.0,
+    "capacity": 100.0,
+    "fraction": 1.0
+   },
+   "reward": {
+    "step": 0.0,
+    "total": 0.0,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": 0.0,
+     "battery": 0.0,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 0,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false
+  },
+  {
+   "step": 1,
+   "robot": {
+    "x": 1,
+    "y": 9,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 1.412,
+     "hit": true,
+     "end": [
+      0.088,
+      9.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.594,
+     "hit": true,
+     "end": [
+      0.027,
+      8.89
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.127,
+     "hit": true,
+     "end": [
+      -0.004,
+      7.996
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.609,
+     "hit": true,
+     "end": [
+      0.502,
+      7.09
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.514,
+     "hit": true,
+     "end": [
+      1.5,
+      6.986
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.663,
+     "hit": true,
+     "end": [
+      2.519,
+      7.04
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 5.963,
+     "hit": true,
+     "end": [
+      5.717,
+      5.283
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 5.973,
+     "hit": true,
+     "end": [
+      7.018,
+      7.214
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.459,
+     "hit": true,
+     "end": [
+      3.959,
+      9.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 99.0,
+    "capacity": 100.0,
+    "fraction": 0.99
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 0.93,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 1,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 2,
+   "robot": {
+    "x": 1,
+    "y": 8,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 1.496,
+     "hit": true,
+     "end": [
+      0.004,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.677,
+     "hit": true,
+     "end": [
+      -0.049,
+      7.858
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.119,
+     "hit": true,
+     "end": [
+      0.002,
+      7.002
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.693,
+     "hit": true,
+     "end": [
+      0.852,
+      6.936
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 1.492,
+     "hit": true,
+     "end": [
+      1.5,
+      7.008
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.643,
+     "hit": true,
+     "end": [
+      2.129,
+      6.982
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.17,
+     "hit": true,
+     "end": [
+      3.035,
+      6.965
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 5.98,
+     "hit": true,
+     "end": [
+      7.025,
+      6.212
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.963,
+     "hit": true,
+     "end": [
+      7.463,
+      8.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 98.0,
+    "capacity": 100.0,
+    "fraction": 0.98
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 1.86,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 2,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 3,
+   "robot": {
+    "x": 1,
+    "y": 7,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 1.429,
+     "hit": true,
+     "end": [
+      0.071,
+      7.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.302,
+     "hit": true,
+     "end": [
+      0.297,
+      7.002
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.736,
+     "hit": true,
+     "end": [
+      0.98,
+      6.98
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 0.475,
+     "hit": true,
+     "end": [
+      1.318,
+      7.062
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 0.515,
+     "hit": true,
+     "end": [
+      1.5,
+      6.985
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 0.517,
+     "hit": true,
+     "end": [
+      1.698,
+      7.022
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 0.752,
+     "hit": true,
+     "end": [
+      2.032,
+      6.968
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.336,
+     "hit": true,
+     "end": [
+      2.734,
+      6.989
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      7.5,
+      7.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 97.0,
+    "capacity": 100.0,
+    "fraction": 0.97
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 2.79,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 3,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 4,
+   "robot": {
+    "x": 1,
+    "y": 7,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 0,
+    "turn": 1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.492,
+     "hit": true,
+     "end": [
+      1.5,
+      7.008
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.519,
+     "hit": true,
+     "end": [
+      1.698,
+      7.021
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.764,
+     "hit": true,
+     "end": [
+      2.04,
+      6.96
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.4,
+     "hit": true,
+     "end": [
+      2.793,
+      6.964
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.937,
+     "hit": true,
+     "end": [
+      7.437,
+      7.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 4.001,
+     "hit": true,
+     "end": [
+      5.196,
+      9.031
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 3.592,
+     "hit": true,
+     "end": [
+      4.04,
+      10.04
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 4.914,
+     "hit": true,
+     "end": [
+      3.381,
+      12.04
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 4.488,
+     "hit": true,
+     "end": [
+      1.5,
+      11.988
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 96.5,
+    "capacity": 100.0,
+    "fraction": 0.965
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 2.73,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 3,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 2
+  },
+  {
+   "step": 5,
+   "robot": {
+    "x": 2,
+    "y": 7,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.509,
+     "hit": true,
+     "end": [
+      2.5,
+      6.991
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.598,
+     "hit": true,
+     "end": [
+      2.729,
+      6.948
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.823,
+     "hit": true,
+     "end": [
+      3.082,
+      6.918
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.415,
+     "hit": true,
+     "end": [
+      3.807,
+      6.958
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      8.5,
+      7.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      8.043,
+      9.796
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.065,
+     "hit": true,
+     "end": [
+      3.96,
+      8.96
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 3.925,
+     "hit": true,
+     "end": [
+      4.002,
+      11.126
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 4.508,
+     "hit": true,
+     "end": [
+      2.5,
+      12.008
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 95.5,
+    "capacity": 100.0,
+    "fraction": 0.955
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 3.66,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 4,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 6,
+   "robot": {
+    "x": 3,
+    "y": 7,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.461,
+     "hit": true,
+     "end": [
+      3.5,
+      7.039
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.545,
+     "hit": true,
+     "end": [
+      3.708,
+      6.997
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.946,
+     "hit": true,
+     "end": [
+      6.998,
+      4.002
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.81,
+     "hit": true,
+     "end": [
+      7.02,
+      6.042
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.941,
+     "hit": true,
+     "end": [
+      9.441,
+      7.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 5.967,
+     "hit": true,
+     "end": [
+      9.013,
+      9.783
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.103,
+     "hit": true,
+     "end": [
+      4.987,
+      8.987
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.567,
+     "hit": true,
+     "end": [
+      4.099,
+      8.947
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 4.562,
+     "hit": true,
+     "end": [
+      3.5,
+      12.062
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 94.5,
+    "capacity": 100.0,
+    "fraction": 0.945
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 4.59,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 5,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 7,
+   "robot": {
+    "x": 4,
+    "y": 7,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 5.975,
+     "hit": true,
+     "end": [
+      4.5,
+      1.525
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.941,
+     "hit": true,
+     "end": [
+      6.008,
+      3.859
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 5.987,
+     "hit": true,
+     "end": [
+      8.733,
+      3.267
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.804,
+     "hit": true,
+     "end": [
+      7.091,
+      6.427
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      10.5,
+      7.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      10.043,
+      9.796
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 5.89,
+     "hit": true,
+     "end": [
+      8.665,
+      11.665
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.628,
+     "hit": true,
+     "end": [
+      5.123,
+      9.004
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.509,
+     "hit": true,
+     "end": [
+      4.5,
+      9.009
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 93.5,
+    "capacity": 100.0,
+    "fraction": 0.935
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 5.52,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 6,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 8,
+   "robot": {
+    "x": 5,
+    "y": 7,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      5.5,
+      1.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.744,
+     "hit": true,
+     "end": [
+      6.933,
+      4.041
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      9.743,
+      3.257
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.559,
+     "hit": true,
+     "end": [
+      6.94,
+      6.903
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.967,
+     "hit": true,
+     "end": [
+      11.467,
+      7.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      11.043,
+      9.796
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      9.743,
+      11.743
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 4.975,
+     "hit": true,
+     "end": [
+      7.404,
+      12.096
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.484,
+     "hit": true,
+     "end": [
+      5.5,
+      8.984
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 92.5,
+    "capacity": 100.0,
+    "fraction": 0.925
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 6.45,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 7,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 9,
+   "robot": {
+    "x": 6,
+    "y": 7,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.493,
+     "hit": true,
+     "end": [
+      6.5,
+      4.007
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.306,
+     "hit": true,
+     "end": [
+      7.0,
+      6.293
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.67,
+     "hit": true,
+     "end": [
+      6.974,
+      7.026
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.261,
+     "hit": true,
+     "end": [
+      7.665,
+      7.017
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.507,
+     "hit": true,
+     "end": [
+      12.007,
+      7.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      12.043,
+      9.796
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      10.743,
+      11.743
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 4.837,
+     "hit": true,
+     "end": [
+      8.351,
+      11.969
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 4.559,
+     "hit": true,
+     "end": [
+      6.5,
+      12.059
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 91.5,
+    "capacity": 100.0,
+    "fraction": 0.915
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 7.38,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 8,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 10,
+   "robot": {
+    "x": 6,
+    "y": 7,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 0,
+    "turn": -1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 5.986,
+     "hit": true,
+     "end": [
+      0.514,
+      7.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.804,
+     "hit": true,
+     "end": [
+      3.91,
+      6.427
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.903,
+     "hit": true,
+     "end": [
+      3.033,
+      4.033
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 5.963,
+     "hit": true,
+     "end": [
+      4.218,
+      1.991
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 3.537,
+     "hit": true,
+     "end": [
+      6.5,
+      3.963
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.377,
+     "hit": true,
+     "end": [
+      7.027,
+      6.228
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 0.733,
+     "hit": true,
+     "end": [
+      7.018,
+      6.982
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.296,
+     "hit": true,
+     "end": [
+      7.697,
+      7.004
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.408,
+     "hit": true,
+     "end": [
+      11.908,
+      7.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 91.0,
+    "capacity": 100.0,
+    "fraction": 0.91
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 7.32,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 8,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 1
+  },
+  {
+   "step": 11,
+   "robot": {
+    "x": 6,
+    "y": 6,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 2.455,
+     "hit": true,
+     "end": [
+      4.045,
+      6.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      0.957,
+      4.204
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.574,
+     "hit": true,
+     "end": [
+      3.972,
+      3.972
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 5.992,
+     "hit": true,
+     "end": [
+      4.207,
+      0.964
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.471,
+     "hit": true,
+     "end": [
+      6.5,
+      4.029
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.769,
+     "hit": true,
+     "end": [
+      7.56,
+      3.942
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 5.936,
+     "hit": true,
+     "end": [
+      10.697,
+      2.303
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 0.489,
+     "hit": true,
+     "end": [
+      6.952,
+      6.313
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 0.506,
+     "hit": true,
+     "end": [
+      7.006,
+      6.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 90.0,
+    "capacity": 100.0,
+    "fraction": 0.9
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 8.25,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 9,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 12,
+   "robot": {
+    "x": 6,
+    "y": 5,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 5.887,
+     "hit": true,
+     "end": [
+      0.613,
+      5.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.944,
+     "hit": true,
+     "end": [
+      2.856,
+      3.991
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.496,
+     "hit": true,
+     "end": [
+      4.028,
+      3.028
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 5.98,
+     "hit": true,
+     "end": [
+      4.211,
+      -0.025
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 1.521,
+     "hit": true,
+     "end": [
+      6.5,
+      3.979
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.635,
+     "hit": true,
+     "end": [
+      7.126,
+      3.989
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      10.743,
+      1.257
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 5.937,
+     "hit": true,
+     "end": [
+      11.985,
+      3.228
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.546,
+     "hit": true,
+     "end": [
+      12.046,
+      5.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 89.0,
+    "capacity": 100.0,
+    "fraction": 0.89
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 9.18,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 10,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 13,
+   "robot": {
+    "x": 6,
+    "y": 4,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      0.5,
+      4.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.767,
+     "hit": true,
+     "end": [
+      3.943,
+      3.441
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      2.257,
+      0.257
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 0.564,
+     "hit": true,
+     "end": [
+      6.284,
+      3.979
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 0.567,
+     "hit": true,
+     "end": [
+      6.5,
+      3.933
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 0.529,
+     "hit": true,
+     "end": [
+      6.702,
+      4.011
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 0.654,
+     "hit": true,
+     "end": [
+      6.962,
+      4.038
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.318,
+     "hit": true,
+     "end": [
+      7.718,
+      3.996
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.437,
+     "hit": true,
+     "end": [
+      11.937,
+      4.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 88.0,
+    "capacity": 100.0,
+    "fraction": 0.88
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 10.11,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 11,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 14,
+   "robot": {
+    "x": 6,
+    "y": 4,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 0,
+    "turn": 1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.454,
+     "hit": true,
+     "end": [
+      6.5,
+      4.046
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.538,
+     "hit": true,
+     "end": [
+      6.706,
+      4.003
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.697,
+     "hit": true,
+     "end": [
+      6.993,
+      4.007
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.274,
+     "hit": true,
+     "end": [
+      7.677,
+      4.013
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.423,
+     "hit": true,
+     "end": [
+      11.923,
+      4.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.938,
+     "hit": true,
+     "end": [
+      10.139,
+      6.007
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.143,
+     "hit": true,
+     "end": [
+      8.015,
+      6.015
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.691,
+     "hit": true,
+     "end": [
+      7.147,
+      6.062
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.999,
+     "hit": true,
+     "end": [
+      6.5,
+      10.499
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 87.5,
+    "capacity": 100.0,
+    "fraction": 0.875
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 10.05,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 11,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 2
+  },
+  {
+   "step": 15,
+   "robot": {
+    "x": 7,
+    "y": 4,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.577,
+     "hit": true,
+     "end": [
+      7.5,
+      3.923
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.595,
+     "hit": true,
+     "end": [
+      7.728,
+      3.95
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      11.743,
+      0.257
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 4.757,
+     "hit": true,
+     "end": [
+      11.895,
+      2.68
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 4.536,
+     "hit": true,
+     "end": [
+      12.036,
+      4.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.942,
+     "hit": true,
+     "end": [
+      11.142,
+      6.009
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.146,
+     "hit": true,
+     "end": [
+      9.018,
+      6.018
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.644,
+     "hit": true,
+     "end": [
+      8.129,
+      6.018
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.494,
+     "hit": true,
+     "end": [
+      7.5,
+      5.994
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 86.5,
+    "capacity": 100.0,
+    "fraction": 0.865
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 10.98,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 12,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 16,
+   "robot": {
+    "x": 8,
+    "y": 4,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 4.541,
+     "hit": true,
+     "end": [
+      8.5,
+      -0.041
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 4.857,
+     "hit": true,
+     "end": [
+      10.359,
+      0.013
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.83,
+     "hit": true,
+     "end": [
+      11.915,
+      1.085
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.77,
+     "hit": true,
+     "end": [
+      11.983,
+      3.057
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 3.435,
+     "hit": true,
+     "end": [
+      11.935,
+      4.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.829,
+     "hit": true,
+     "end": [
+      12.038,
+      5.965
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.111,
+     "hit": true,
+     "end": [
+      9.992,
+      5.992
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.629,
+     "hit": true,
+     "end": [
+      9.123,
+      6.005
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.433,
+     "hit": true,
+     "end": [
+      8.5,
+      5.933
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 85.5,
+    "capacity": 100.0,
+    "fraction": 0.855
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 11.91,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 13,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 17,
+   "robot": {
+    "x": 9,
+    "y": 4,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 4.499,
+     "hit": true,
+     "end": [
+      9.5,
+      0.001
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 4.874,
+     "hit": true,
+     "end": [
+      11.365,
+      -0.003
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.451,
+     "hit": true,
+     "end": [
+      11.94,
+      2.06
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.74,
+     "hit": true,
+     "end": [
+      12.031,
+      3.451
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.47,
+     "hit": true,
+     "end": [
+      11.97,
+      4.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.666,
+     "hit": true,
+     "end": [
+      11.963,
+      5.52
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.005,
+     "hit": true,
+     "end": [
+      10.918,
+      5.918
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.651,
+     "hit": true,
+     "end": [
+      10.132,
+      6.025
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.46,
+     "hit": true,
+     "end": [
+      9.5,
+      5.96
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 84.5,
+    "capacity": 100.0,
+    "fraction": 0.845
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 12.84,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 14,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 18,
+   "robot": {
+    "x": 10,
+    "y": 4,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 4.498,
+     "hit": true,
+     "end": [
+      10.5,
+      0.002
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.913,
+     "hit": true,
+     "end": [
+      11.998,
+      0.885
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.216,
+     "hit": true,
+     "end": [
+      12.067,
+      2.933
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.623,
+     "hit": true,
+     "end": [
+      11.999,
+      3.879
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 1.479,
+     "hit": true,
+     "end": [
+      11.979,
+      4.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.551,
+     "hit": true,
+     "end": [
+      11.933,
+      5.093
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.207,
+     "hit": true,
+     "end": [
+      12.061,
+      6.061
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.671,
+     "hit": true,
+     "end": [
+      11.139,
+      6.044
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.528,
+     "hit": true,
+     "end": [
+      10.5,
+      6.028
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 83.5,
+    "capacity": 100.0,
+    "fraction": 0.835
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 13.77,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 15,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 19,
+   "robot": {
+    "x": 10,
+    "y": 4,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 0,
+    "turn": -1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      4.5,
+      4.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.771,
+     "hit": true,
+     "end": [
+      7.94,
+      3.44
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.544,
+     "hit": true,
+     "end": [
+      7.994,
+      1.994
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 4.906,
+     "hit": true,
+     "end": [
+      8.623,
+      -0.032
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 4.517,
+     "hit": true,
+     "end": [
+      10.5,
+      -0.017
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.851,
+     "hit": true,
+     "end": [
+      11.974,
+      0.942
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.176,
+     "hit": true,
+     "end": [
+      12.039,
+      2.961
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.528,
+     "hit": true,
+     "end": [
+      11.912,
+      3.915
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.463,
+     "hit": true,
+     "end": [
+      11.963,
+      4.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 83.0,
+    "capacity": 100.0,
+    "fraction": 0.83
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 13.71,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 15,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 1
+  },
+  {
+   "step": 20,
+   "robot": {
+    "x": 10,
+    "y": 3,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 2.515,
+     "hit": true,
+     "end": [
+      7.985,
+      3.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.673,
+     "hit": true,
+     "end": [
+      8.031,
+      2.477
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.556,
+     "hit": true,
+     "end": [
+      7.986,
+      0.986
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.765,
+     "hit": true,
+     "end": [
+      9.059,
+      0.022
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 3.503,
+     "hit": true,
+     "end": [
+      10.5,
+      -0.003
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.801,
+     "hit": true,
+     "end": [
+      11.955,
+      -0.012
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.101,
+     "hit": true,
+     "end": [
+      11.986,
+      2.014
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.694,
+     "hit": true,
+     "end": [
+      12.065,
+      2.852
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.493,
+     "hit": true,
+     "end": [
+      11.993,
+      3.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 82.0,
+    "capacity": 100.0,
+    "fraction": 0.82
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 14.64,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 16,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 21,
+   "robot": {
+    "x": 10,
+    "y": 2,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 2.501,
+     "hit": true,
+     "end": [
+      7.999,
+      2.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.628,
+     "hit": true,
+     "end": [
+      8.072,
+      1.494
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.46,
+     "hit": true,
+     "end": [
+      8.054,
+      0.054
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.779,
+     "hit": true,
+     "end": [
+      9.436,
+      -0.068
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.522,
+     "hit": true,
+     "end": [
+      10.5,
+      -0.022
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.711,
+     "hit": true,
+     "end": [
+      11.537,
+      -0.004
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.207,
+     "hit": true,
+     "end": [
+      12.061,
+      0.939
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.561,
+     "hit": true,
+     "end": [
+      11.942,
+      1.903
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.446,
+     "hit": true,
+     "end": [
+      11.946,
+      2.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": false
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 81.0,
+    "capacity": 100.0,
+    "fraction": 0.81
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 15.57,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 0,
+   "target": "beacon_1",
+   "visited": [],
+   "collisions": 0,
+   "path_length": 17,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 22,
+   "robot": {
+    "x": 10,
+    "y": 1,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 2.501,
+     "hit": true,
+     "end": [
+      7.999,
+      1.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.754,
+     "hit": true,
+     "end": [
+      7.955,
+      0.446
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.092,
+     "hit": true,
+     "end": [
+      9.021,
+      0.021
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.594,
+     "hit": true,
+     "end": [
+      9.89,
+      0.027
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 1.395,
+     "hit": true,
+     "end": [
+      10.5,
+      0.105
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.661,
+     "hit": true,
+     "end": [
+      11.136,
+      -0.035
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.165,
+     "hit": true,
+     "end": [
+      12.031,
+      -0.031
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.601,
+     "hit": true,
+     "end": [
+      11.979,
+      0.887
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.483,
+     "hit": true,
+     "end": [
+      11.983,
+      1.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 80.0,
+    "capacity": 100.0,
+    "fraction": 0.8
+   },
+   "reward": {
+    "step": 10.93,
+    "total": 26.5,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 10.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 18,
+   "events": [
+    "beacon_1"
+   ],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 23,
+   "robot": {
+    "x": 10,
+    "y": 1,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 0,
+    "turn": -1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 4.41,
+     "hit": true,
+     "end": [
+      10.5,
+      5.91
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 4.851,
+     "hit": true,
+     "end": [
+      8.643,
+      5.982
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      6.257,
+      5.743
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.732,
+     "hit": true,
+     "end": [
+      7.976,
+      2.545
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.641,
+     "hit": true,
+     "end": [
+      7.859,
+      1.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.686,
+     "hit": true,
+     "end": [
+      8.019,
+      0.472
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.154,
+     "hit": true,
+     "end": [
+      8.977,
+      -0.023
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.615,
+     "hit": true,
+     "end": [
+      9.882,
+      0.008
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.503,
+     "hit": true,
+     "end": [
+      10.5,
+      -0.003
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 79.5,
+    "capacity": 100.0,
+    "fraction": 0.795
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 26.44,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 18,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 1
+  },
+  {
+   "step": 24,
+   "robot": {
+    "x": 9,
+    "y": 1,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 4.475,
+     "hit": true,
+     "end": [
+      9.5,
+      5.975
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 4.847,
+     "hit": true,
+     "end": [
+      7.645,
+      5.978
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.082,
+     "hit": true,
+     "end": [
+      8.028,
+      2.972
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.778,
+     "hit": true,
+     "end": [
+      7.857,
+      2.181
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 1.521,
+     "hit": true,
+     "end": [
+      7.979,
+      1.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.524,
+     "hit": true,
+     "end": [
+      8.092,
+      0.917
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.093,
+     "hit": true,
+     "end": [
+      8.02,
+      0.02
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.659,
+     "hit": true,
+     "end": [
+      8.865,
+      -0.033
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.45,
+     "hit": true,
+     "end": [
+      9.5,
+      0.05
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 78.5,
+    "capacity": 100.0,
+    "fraction": 0.785
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 27.37,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 19,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 25,
+   "robot": {
+    "x": 8,
+    "y": 1,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 4.543,
+     "hit": true,
+     "end": [
+      8.5,
+      6.043
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.375,
+     "hit": true,
+     "end": [
+      7.974,
+      2.77
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.717,
+     "hit": true,
+     "end": [
+      7.993,
+      2.007
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 0.501,
+     "hit": true,
+     "end": [
+      8.037,
+      1.692
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 0.475,
+     "hit": true,
+     "end": [
+      8.025,
+      1.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 0.49,
+     "hit": true,
+     "end": [
+      8.047,
+      1.312
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 0.651,
+     "hit": true,
+     "end": [
+      8.039,
+      1.039
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.385,
+     "hit": true,
+     "end": [
+      7.97,
+      0.22
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.555,
+     "hit": true,
+     "end": [
+      8.5,
+      -0.055
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 77.5,
+    "capacity": 100.0,
+    "fraction": 0.775
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 28.3,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 20,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 26,
+   "robot": {
+    "x": 8,
+    "y": 1,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 0,
+    "turn": -1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.412,
+     "hit": true,
+     "end": [
+      11.912,
+      1.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.716,
+     "hit": true,
+     "end": [
+      11.933,
+      2.922
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.837,
+     "hit": true,
+     "end": [
+      11.92,
+      4.92
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 4.827,
+     "hit": true,
+     "end": [
+      10.347,
+      5.959
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 4.32,
+     "hit": true,
+     "end": [
+      8.5,
+      5.82
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.268,
+     "hit": true,
+     "end": [
+      8.015,
+      2.671
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 0.79,
+     "hit": true,
+     "end": [
+      7.941,
+      2.059
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 0.508,
+     "hit": true,
+     "end": [
+      8.031,
+      1.694
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 0.568,
+     "hit": true,
+     "end": [
+      7.932,
+      1.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 77.0,
+    "capacity": 100.0,
+    "fraction": 0.77
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 28.24,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 20,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 1
+  },
+  {
+   "step": 27,
+   "robot": {
+    "x": 8,
+    "y": 2,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.451,
+     "hit": true,
+     "end": [
+      11.951,
+      2.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.863,
+     "hit": true,
+     "end": [
+      12.069,
+      3.978
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.935,
+     "hit": true,
+     "end": [
+      11.99,
+      5.99
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.756,
+     "hit": true,
+     "end": [
+      9.937,
+      5.97
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 3.603,
+     "hit": true,
+     "end": [
+      8.5,
+      6.103
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.309,
+     "hit": true,
+     "end": [
+      7.999,
+      3.709
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 0.664,
+     "hit": true,
+     "end": [
+      8.031,
+      2.969
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 0.535,
+     "hit": true,
+     "end": [
+      8.006,
+      2.705
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 0.523,
+     "hit": true,
+     "end": [
+      7.977,
+      2.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 76.0,
+    "capacity": 100.0,
+    "fraction": 0.76
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 29.17,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 21,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 28,
+   "robot": {
+    "x": 8,
+    "y": 3,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.528,
+     "hit": true,
+     "end": [
+      12.028,
+      3.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.729,
+     "hit": true,
+     "end": [
+      11.945,
+      4.927
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.565,
+     "hit": true,
+     "end": [
+      11.021,
+      6.021
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.768,
+     "hit": true,
+     "end": [
+      9.559,
+      6.057
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.442,
+     "hit": true,
+     "end": [
+      8.5,
+      5.942
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.733,
+     "hit": true,
+     "end": [
+      7.454,
+      6.025
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 5.958,
+     "hit": true,
+     "end": [
+      4.287,
+      7.713
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 0.642,
+     "hit": true,
+     "end": [
+      7.907,
+      3.746
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 0.49,
+     "hit": true,
+     "end": [
+      8.01,
+      3.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 75.0,
+    "capacity": 100.0,
+    "fraction": 0.75
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 30.1,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 22,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 29,
+   "robot": {
+    "x": 8,
+    "y": 4,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.452,
+     "hit": true,
+     "end": [
+      11.952,
+      4.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.722,
+     "hit": true,
+     "end": [
+      11.938,
+      5.924
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.108,
+     "hit": true,
+     "end": [
+      9.99,
+      5.99
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.625,
+     "hit": true,
+     "end": [
+      9.122,
+      6.001
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 1.513,
+     "hit": true,
+     "end": [
+      8.5,
+      6.013
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.594,
+     "hit": true,
+     "end": [
+      7.89,
+      5.973
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 5.991,
+     "hit": true,
+     "end": [
+      4.264,
+      8.736
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 4.804,
+     "hit": true,
+     "end": [
+      4.062,
+      6.338
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.959,
+     "hit": true,
+     "end": [
+      2.541,
+      4.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 74.0,
+    "capacity": 100.0,
+    "fraction": 0.74
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 31.03,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 23,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 30,
+   "robot": {
+    "x": 8,
+    "y": 5,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.613,
+     "hit": true,
+     "end": [
+      12.113,
+      5.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.377,
+     "hit": true,
+     "end": [
+      9.772,
+      6.027
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.686,
+     "hit": true,
+     "end": [
+      8.985,
+      5.985
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 0.458,
+     "hit": true,
+     "end": [
+      8.675,
+      5.923
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 0.426,
+     "hit": true,
+     "end": [
+      8.5,
+      5.926
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 0.524,
+     "hit": true,
+     "end": [
+      8.3,
+      5.984
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 0.727,
+     "hit": true,
+     "end": [
+      7.986,
+      6.014
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.288,
+     "hit": true,
+     "end": [
+      7.31,
+      5.993
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.936,
+     "hit": true,
+     "end": [
+      2.564,
+      5.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 73.0,
+    "capacity": 100.0,
+    "fraction": 0.73
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 31.96,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 24,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 31,
+   "robot": {
+    "x": 8,
+    "y": 5,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 0,
+    "turn": 1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.546,
+     "hit": true,
+     "end": [
+      8.5,
+      6.046
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.548,
+     "hit": true,
+     "end": [
+      8.29,
+      6.006
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.706,
+     "hit": true,
+     "end": [
+      8.001,
+      5.999
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.314,
+     "hit": true,
+     "end": [
+      7.286,
+      6.003
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.974,
+     "hit": true,
+     "end": [
+      2.526,
+      5.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 4.728,
+     "hit": true,
+     "end": [
+      4.132,
+      3.691
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.131,
+     "hit": true,
+     "end": [
+      6.993,
+      3.993
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.571,
+     "hit": true,
+     "end": [
+      7.899,
+      4.048
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.475,
+     "hit": true,
+     "end": [
+      8.5,
+      0.025
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 72.5,
+    "capacity": 100.0,
+    "fraction": 0.725
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 31.9,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 24,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 2
+  },
+  {
+   "step": 32,
+   "robot": {
+    "x": 7,
+    "y": 5,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.443,
+     "hit": true,
+     "end": [
+      7.5,
+      5.943
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.562,
+     "hit": true,
+     "end": [
+      7.285,
+      6.019
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 5.941,
+     "hit": true,
+     "end": [
+      3.299,
+      9.701
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.703,
+     "hit": true,
+     "end": [
+      4.079,
+      6.917
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      1.5,
+      5.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.963,
+     "hit": true,
+     "end": [
+      3.839,
+      3.984
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 5.952,
+     "hit": true,
+     "end": [
+      3.291,
+      1.291
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.653,
+     "hit": true,
+     "end": [
+      6.867,
+      3.973
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.51,
+     "hit": true,
+     "end": [
+      7.5,
+      3.99
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 71.5,
+    "capacity": 100.0,
+    "fraction": 0.715
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 32.83,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 25,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 33,
+   "robot": {
+    "x": 6,
+    "y": 5,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      6.5,
+      11.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.712,
+     "hit": true,
+     "end": [
+      5.079,
+      8.929
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      2.257,
+      9.743
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.785,
+     "hit": true,
+     "end": [
+      3.927,
+      6.566
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      0.5,
+      5.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.953,
+     "hit": true,
+     "end": [
+      2.848,
+      3.987
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 3.336,
+     "hit": true,
+     "end": [
+      4.141,
+      3.141
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 5.988,
+     "hit": true,
+     "end": [
+      4.208,
+      -0.032
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.524,
+     "hit": true,
+     "end": [
+      6.5,
+      3.976
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 70.5,
+    "capacity": 100.0,
+    "fraction": 0.705
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 33.76,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 26,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 34,
+   "robot": {
+    "x": 6,
+    "y": 5,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 0,
+    "turn": -1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 5.468,
+     "hit": true,
+     "end": [
+      11.968,
+      5.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.293,
+     "hit": true,
+     "end": [
+      7.695,
+      5.995
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.728,
+     "hit": true,
+     "end": [
+      7.015,
+      6.015
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.346,
+     "hit": true,
+     "end": [
+      7.015,
+      6.743
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.987,
+     "hit": true,
+     "end": [
+      6.5,
+      11.487
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.752,
+     "hit": true,
+     "end": [
+      5.064,
+      8.966
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      2.257,
+      9.743
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.67,
+     "hit": true,
+     "end": [
+      4.033,
+      6.522
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      0.5,
+      5.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 70.0,
+    "capacity": 100.0,
+    "fraction": 0.7
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 33.7,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 26,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 1
+  },
+  {
+   "step": 35,
+   "robot": {
+    "x": 6,
+    "y": 6,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.484,
+     "hit": true,
+     "end": [
+      6.984,
+      6.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.485,
+     "hit": true,
+     "end": [
+      6.948,
+      6.686
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 5.986,
+     "hit": true,
+     "end": [
+      10.732,
+      10.732
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 5.929,
+     "hit": true,
+     "end": [
+      8.769,
+      11.978
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.509,
+     "hit": true,
+     "end": [
+      6.5,
+      12.009
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.742,
+     "hit": true,
+     "end": [
+      5.451,
+      9.034
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 5.972,
+     "hit": true,
+     "end": [
+      2.277,
+      10.723
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 5.945,
+     "hit": true,
+     "end": [
+      1.008,
+      8.775
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.54,
+     "hit": true,
+     "end": [
+      3.96,
+      6.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 69.0,
+    "capacity": 100.0,
+    "fraction": 0.69
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 34.63,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 27,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 36,
+   "robot": {
+    "x": 6,
+    "y": 7,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 5.523,
+     "hit": true,
+     "end": [
+      12.023,
+      7.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 5.969,
+     "hit": true,
+     "end": [
+      12.015,
+      9.784
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      10.743,
+      11.743
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 4.856,
+     "hit": true,
+     "end": [
+      8.358,
+      11.987
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 4.478,
+     "hit": true,
+     "end": [
+      6.5,
+      11.978
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.61,
+     "hit": true,
+     "end": [
+      5.884,
+      8.988
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.14,
+     "hit": true,
+     "end": [
+      4.987,
+      9.013
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 5.925,
+     "hit": true,
+     "end": [
+      1.026,
+      9.767
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      0.5,
+      7.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 68.0,
+    "capacity": 100.0,
+    "fraction": 0.68
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 35.56,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 28,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 37,
+   "robot": {
+    "x": 6,
+    "y": 8,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 5.464,
+     "hit": true,
+     "end": [
+      11.964,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 5.993,
+     "hit": true,
+     "end": [
+      12.037,
+      10.793
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.908,
+     "hit": true,
+     "end": [
+      9.97,
+      11.97
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.791,
+     "hit": true,
+     "end": [
+      7.951,
+      12.002
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 3.421,
+     "hit": true,
+     "end": [
+      6.5,
+      11.921
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.384,
+     "hit": true,
+     "end": [
+      5.97,
+      9.779
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 0.64,
+     "hit": true,
+     "end": [
+      6.048,
+      8.952
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.273,
+     "hit": true,
+     "end": [
+      5.324,
+      8.987
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      0.5,
+      8.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 67.0,
+    "capacity": 100.0,
+    "fraction": 0.67
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 36.49,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 29,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 38,
+   "robot": {
+    "x": 6,
+    "y": 9,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 5.548,
+     "hit": true,
+     "end": [
+      12.048,
+      9.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 5.989,
+     "hit": true,
+     "end": [
+      12.033,
+      11.792
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.513,
+     "hit": true,
+     "end": [
+      8.984,
+      11.984
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.654,
+     "hit": true,
+     "end": [
+      7.516,
+      11.952
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.465,
+     "hit": true,
+     "end": [
+      6.5,
+      11.965
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.324,
+     "hit": true,
+     "end": [
+      5.993,
+      10.723
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 0.81,
+     "hit": true,
+     "end": [
+      5.928,
+      10.072
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 0.556,
+     "hit": true,
+     "end": [
+      5.986,
+      9.713
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 0.449,
+     "hit": true,
+     "end": [
+      6.051,
+      9.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 66.0,
+    "capacity": 100.0,
+    "fraction": 0.66
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 37.42,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 30,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 39,
+   "robot": {
+    "x": 6,
+    "y": 9,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 0,
+    "turn": -1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 5.626,
+     "hit": true,
+     "end": [
+      6.5,
+      3.874
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.705,
+     "hit": true,
+     "end": [
+      7.535,
+      7.001
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.481,
+     "hit": true,
+     "end": [
+      8.961,
+      7.039
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      12.043,
+      7.204
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.473,
+     "hit": true,
+     "end": [
+      11.973,
+      9.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 5.957,
+     "hit": true,
+     "end": [
+      12.003,
+      11.78
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 3.536,
+     "hit": true,
+     "end": [
+      9.0,
+      12.0
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.767,
+     "hit": true,
+     "end": [
+      7.559,
+      12.057
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.525,
+     "hit": true,
+     "end": [
+      6.5,
+      12.025
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 65.5,
+    "capacity": 100.0,
+    "fraction": 0.655
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 37.36,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 30,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 1
+  },
+  {
+   "step": 40,
+   "robot": {
+    "x": 7,
+    "y": 9,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 2.456,
+     "hit": true,
+     "end": [
+      7.5,
+      7.044
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.825,
+     "hit": true,
+     "end": [
+      8.581,
+      6.89
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.572,
+     "hit": true,
+     "end": [
+      10.026,
+      6.974
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 4.856,
+     "hit": true,
+     "end": [
+      11.986,
+      7.642
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 4.434,
+     "hit": true,
+     "end": [
+      11.934,
+      9.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 4.827,
+     "hit": true,
+     "end": [
+      11.959,
+      11.347
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 3.531,
+     "hit": true,
+     "end": [
+      9.997,
+      11.997
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.693,
+     "hit": true,
+     "end": [
+      8.53,
+      11.988
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.437,
+     "hit": true,
+     "end": [
+      7.5,
+      11.937
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 64.5,
+    "capacity": 100.0,
+    "fraction": 0.645
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 38.29,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 31,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 41,
+   "robot": {
+    "x": 8,
+    "y": 9,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 2.566,
+     "hit": true,
+     "end": [
+      8.5,
+      6.934
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.743,
+     "hit": true,
+     "end": [
+      9.55,
+      6.966
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.505,
+     "hit": true,
+     "end": [
+      10.979,
+      7.021
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.812,
+     "hit": true,
+     "end": [
+      12.022,
+      8.041
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 3.543,
+     "hit": true,
+     "end": [
+      12.043,
+      9.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.72,
+     "hit": true,
+     "end": [
+      11.937,
+      10.924
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 3.495,
+     "hit": true,
+     "end": [
+      10.971,
+      11.971
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.772,
+     "hit": true,
+     "end": [
+      9.561,
+      12.061
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.511,
+     "hit": true,
+     "end": [
+      8.5,
+      12.011
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 63.5,
+    "capacity": 100.0,
+    "fraction": 0.635
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 39.22,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 32,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 42,
+   "robot": {
+    "x": 9,
+    "y": 9,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 2.536,
+     "hit": true,
+     "end": [
+      9.5,
+      6.964
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.783,
+     "hit": true,
+     "end": [
+      10.565,
+      6.929
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.471,
+     "hit": true,
+     "end": [
+      11.954,
+      7.046
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.651,
+     "hit": true,
+     "end": [
+      11.949,
+      8.485
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.432,
+     "hit": true,
+     "end": [
+      11.932,
+      9.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.731,
+     "hit": true,
+     "end": [
+      12.023,
+      10.545
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 3.485,
+     "hit": true,
+     "end": [
+      11.964,
+      11.964
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.701,
+     "hit": true,
+     "end": [
+      10.533,
+      11.995
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.426,
+     "hit": true,
+     "end": [
+      9.5,
+      11.926
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": false
+    }
+   ],
+   "battery": {
+    "value": 62.5,
+    "capacity": 100.0,
+    "fraction": 0.625
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 40.15,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 1,
+   "target": "beacon_2",
+   "visited": [
+    1
+   ],
+   "collisions": 0,
+   "path_length": 33,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 43,
+   "robot": {
+    "x": 10,
+    "y": 9,
+    "orientation": "E",
+    "heading_deg": 90,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 2.494,
+     "hit": true,
+     "end": [
+      10.5,
+      7.006
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 2.675,
+     "hit": true,
+     "end": [
+      11.524,
+      7.029
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.143,
+     "hit": true,
+     "end": [
+      12.016,
+      7.984
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.665,
+     "hit": true,
+     "end": [
+      12.038,
+      8.863
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 1.451,
+     "hit": true,
+     "end": [
+      11.951,
+      9.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.615,
+     "hit": true,
+     "end": [
+      11.992,
+      10.118
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.096,
+     "hit": true,
+     "end": [
+      11.982,
+      10.982
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.752,
+     "hit": true,
+     "end": [
+      11.553,
+      12.042
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.479,
+     "hit": true,
+     "end": [
+      10.5,
+      11.979
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 61.5,
+    "capacity": 100.0,
+    "fraction": 0.615
+   },
+   "reward": {
+    "step": 10.93,
+    "total": 51.08,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 10.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 34,
+   "events": [
+    "beacon_2"
+   ],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 44,
+   "robot": {
+    "x": 10,
+    "y": 9,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 0,
+    "turn": -1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 4.605,
+     "hit": true,
+     "end": [
+      5.895,
+      9.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 5.945,
+     "hit": true,
+     "end": [
+      5.007,
+      7.225
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.543,
+     "hit": true,
+     "end": [
+      7.995,
+      6.995
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.747,
+     "hit": true,
+     "end": [
+      9.449,
+      6.962
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.507,
+     "hit": true,
+     "end": [
+      10.5,
+      6.993
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.754,
+     "hit": true,
+     "end": [
+      11.554,
+      6.955
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.053,
+     "hit": true,
+     "end": [
+      11.952,
+      8.048
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.731,
+     "hit": true,
+     "end": [
+      12.099,
+      8.838
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.408,
+     "hit": true,
+     "end": [
+      11.908,
+      9.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 61.0,
+    "capacity": 100.0,
+    "fraction": 0.61
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 51.02,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 34,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 1
+  },
+  {
+   "step": 45,
+   "robot": {
+    "x": 10,
+    "y": 8,
+    "orientation": "N",
+    "heading_deg": 0,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      4.5,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 5.944,
+     "hit": true,
+     "end": [
+      5.009,
+      6.225
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.183,
+     "hit": true,
+     "end": [
+      8.957,
+      6.957
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.606,
+     "hit": true,
+     "end": [
+      9.886,
+      7.016
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 1.533,
+     "hit": true,
+     "end": [
+      10.5,
+      6.967
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.628,
+     "hit": true,
+     "end": [
+      11.123,
+      6.996
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.18,
+     "hit": true,
+     "end": [
+      12.042,
+      6.958
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.609,
+     "hit": true,
+     "end": [
+      11.986,
+      7.884
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.327,
+     "hit": true,
+     "end": [
+      11.827,
+      8.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 60.0,
+    "capacity": 100.0,
+    "fraction": 0.6
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 51.95,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 35,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 46,
+   "robot": {
+    "x": 10,
+    "y": 8,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 0,
+    "turn": -1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.437,
+     "hit": true,
+     "end": [
+      10.5,
+      11.937
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.784,
+     "hit": true,
+     "end": [
+      9.052,
+      11.996
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.903,
+     "hit": true,
+     "end": [
+      7.033,
+      11.967
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 4.913,
+     "hit": true,
+     "end": [
+      5.961,
+      10.38
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      4.5,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 5.993,
+     "hit": true,
+     "end": [
+      4.964,
+      6.207
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.051,
+     "hit": true,
+     "end": [
+      9.05,
+      7.05
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.694,
+     "hit": true,
+     "end": [
+      9.852,
+      6.935
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.579,
+     "hit": true,
+     "end": [
+      10.5,
+      6.921
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 59.5,
+    "capacity": 100.0,
+    "fraction": 0.595
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 51.89,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 35,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 1
+  },
+  {
+   "step": 47,
+   "robot": {
+    "x": 9,
+    "y": 8,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.46,
+     "hit": true,
+     "end": [
+      9.5,
+      11.96
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.88,
+     "hit": true,
+     "end": [
+      8.015,
+      12.085
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.908,
+     "hit": true,
+     "end": [
+      6.03,
+      11.97
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.718,
+     "hit": true,
+     "end": [
+      6.065,
+      9.923
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.992,
+     "hit": true,
+     "end": [
+      3.508,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      3.957,
+      6.204
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.078,
+     "hit": true,
+     "end": [
+      8.031,
+      7.031
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.723,
+     "hit": true,
+     "end": [
+      8.841,
+      6.909
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.48,
+     "hit": true,
+     "end": [
+      9.5,
+      7.02
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 58.5,
+    "capacity": 100.0,
+    "fraction": 0.585
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 52.82,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 36,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 48,
+   "robot": {
+    "x": 8,
+    "y": 8,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.523,
+     "hit": true,
+     "end": [
+      8.5,
+      12.023
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.802,
+     "hit": true,
+     "end": [
+      7.045,
+      12.013
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.517,
+     "hit": true,
+     "end": [
+      6.013,
+      10.987
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.779,
+     "hit": true,
+     "end": [
+      5.933,
+      9.563
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.925,
+     "hit": true,
+     "end": [
+      2.575,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 4.943,
+     "hit": true,
+     "end": [
+      3.933,
+      6.608
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 5.997,
+     "hit": true,
+     "end": [
+      4.26,
+      4.26
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.598,
+     "hit": true,
+     "end": [
+      7.889,
+      7.024
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.562,
+     "hit": true,
+     "end": [
+      8.5,
+      6.938
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 57.5,
+    "capacity": 100.0,
+    "fraction": 0.575
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 53.75,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 37,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 49,
+   "robot": {
+    "x": 7,
+    "y": 8,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.528,
+     "hit": true,
+     "end": [
+      7.5,
+      12.028
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.813,
+     "hit": true,
+     "end": [
+      6.041,
+      12.023
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.225,
+     "hit": true,
+     "end": [
+      5.927,
+      10.073
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.679,
+     "hit": true,
+     "end": [
+      5.949,
+      9.143
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      1.5,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.898,
+     "hit": true,
+     "end": [
+      3.899,
+      7.008
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      3.257,
+      4.257
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      5.204,
+      2.957
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.524,
+     "hit": true,
+     "end": [
+      7.5,
+      6.976
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 56.5,
+    "capacity": 100.0,
+    "fraction": 0.565
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 54.68,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 38,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 50,
+   "robot": {
+    "x": 6,
+    "y": 8,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.49,
+     "hit": true,
+     "end": [
+      6.5,
+      11.99
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.346,
+     "hit": true,
+     "end": [
+      5.985,
+      9.744
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.767,
+     "hit": true,
+     "end": [
+      5.957,
+      9.043
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.32,
+     "hit": true,
+     "end": [
+      5.281,
+      9.005
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.983,
+     "hit": true,
+     "end": [
+      0.517,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.884,
+     "hit": true,
+     "end": [
+      2.912,
+      7.014
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 5.955,
+     "hit": true,
+     "end": [
+      2.289,
+      4.289
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 6.0,
+     "hit": false,
+     "end": [
+      4.204,
+      2.957
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 4.521,
+     "hit": true,
+     "end": [
+      6.5,
+      3.979
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 55.5,
+    "capacity": 100.0,
+    "fraction": 0.555
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 55.61,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 39,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 51,
+   "robot": {
+    "x": 5,
+    "y": 8,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.514,
+     "hit": true,
+     "end": [
+      5.5,
+      9.014
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.46,
+     "hit": true,
+     "end": [
+      5.324,
+      8.925
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 0.628,
+     "hit": true,
+     "end": [
+      5.056,
+      8.944
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.273,
+     "hit": true,
+     "end": [
+      4.324,
+      8.987
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 5.582,
+     "hit": true,
+     "end": [
+      -0.082,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.978,
+     "hit": true,
+     "end": [
+      1.824,
+      6.978
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.142,
+     "hit": true,
+     "end": [
+      3.986,
+      6.986
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 4.835,
+     "hit": true,
+     "end": [
+      3.65,
+      4.033
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.993,
+     "hit": true,
+     "end": [
+      5.5,
+      2.507
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 54.5,
+    "capacity": 100.0,
+    "fraction": 0.545
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 56.54,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 40,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 52,
+   "robot": {
+    "x": 4,
+    "y": 8,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 0.46,
+     "hit": true,
+     "end": [
+      4.5,
+      8.96
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 0.508,
+     "hit": true,
+     "end": [
+      4.306,
+      8.969
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.8,
+     "hit": true,
+     "end": [
+      1.106,
+      11.894
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 4.832,
+     "hit": true,
+     "end": [
+      0.036,
+      10.349
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 4.515,
+     "hit": true,
+     "end": [
+      -0.015,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 4.001,
+     "hit": true,
+     "end": [
+      0.804,
+      6.969
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.133,
+     "hit": true,
+     "end": [
+      2.992,
+      6.992
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.695,
+     "hit": true,
+     "end": [
+      3.851,
+      6.934
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 5.98,
+     "hit": true,
+     "end": [
+      4.5,
+      2.52
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 53.5,
+    "capacity": 100.0,
+    "fraction": 0.535
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 57.47,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 41,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 53,
+   "robot": {
+    "x": 3,
+    "y": 8,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.462,
+     "hit": true,
+     "end": [
+      3.5,
+      11.962
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.58,
+     "hit": true,
+     "end": [
+      2.13,
+      11.808
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 4.948,
+     "hit": true,
+     "end": [
+      0.001,
+      11.999
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.802,
+     "hit": true,
+     "end": [
+      -0.013,
+      9.955
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 3.613,
+     "hit": true,
+     "end": [
+      -0.113,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.751,
+     "hit": true,
+     "end": [
+      0.035,
+      7.065
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.13,
+     "hit": true,
+     "end": [
+      1.994,
+      6.994
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.59,
+     "hit": true,
+     "end": [
+      2.892,
+      7.031
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.466,
+     "hit": true,
+     "end": [
+      3.5,
+      7.034
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 52.5,
+    "capacity": 100.0,
+    "fraction": 0.525
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 58.4,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 42,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 54,
+   "robot": {
+    "x": 2,
+    "y": 8,
+    "orientation": "O",
+    "heading_deg": 270,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 3.439,
+     "hit": true,
+     "end": [
+      2.5,
+      11.939
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 3.758,
+     "hit": true,
+     "end": [
+      1.062,
+      11.972
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 3.593,
+     "hit": true,
+     "end": [
+      -0.04,
+      11.04
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.725,
+     "hit": true,
+     "end": [
+      -0.018,
+      9.543
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.485,
+     "hit": true,
+     "end": [
+      0.015,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.732,
+     "hit": true,
+     "end": [
+      -0.024,
+      7.454
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.136,
+     "hit": true,
+     "end": [
+      0.99,
+      6.99
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 1.591,
+     "hit": true,
+     "end": [
+      1.891,
+      7.03
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 1.582,
+     "hit": true,
+     "end": [
+      2.5,
+      6.918
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 51.5,
+    "capacity": 100.0,
+    "fraction": 0.515
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 59.33,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 43,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 55,
+   "robot": {
+    "x": 2,
+    "y": 8,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 0,
+    "turn": -1
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 5.906,
+     "hit": true,
+     "end": [
+      8.406,
+      8.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.614,
+     "hit": true,
+     "end": [
+      3.991,
+      9.118
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.158,
+     "hit": true,
+     "end": [
+      4.026,
+      10.026
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 3.708,
+     "hit": true,
+     "end": [
+      3.919,
+      11.926
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 3.493,
+     "hit": true,
+     "end": [
+      2.5,
+      11.993
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 3.84,
+     "hit": true,
+     "end": [
+      1.031,
+      12.047
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 3.548,
+     "hit": true,
+     "end": [
+      -0.009,
+      11.009
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.64,
+     "hit": true,
+     "end": [
+      0.061,
+      9.51
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.489,
+     "hit": true,
+     "end": [
+      0.011,
+      8.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 51.0,
+    "capacity": 100.0,
+    "fraction": 0.51
+   },
+   "reward": {
+    "step": -0.06,
+    "total": 59.27,
+    "breakdown": {
+     "progress": 0.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.01,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 43,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 1
+  },
+  {
+   "step": 56,
+   "robot": {
+    "x": 2,
+    "y": 9,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 1.537,
+     "hit": true,
+     "end": [
+      4.037,
+      9.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.64,
+     "hit": true,
+     "end": [
+      4.015,
+      10.128
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.125,
+     "hit": true,
+     "end": [
+      4.002,
+      11.002
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 2.747,
+     "hit": true,
+     "end": [
+      3.551,
+      12.038
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 2.511,
+     "hit": true,
+     "end": [
+      2.5,
+      12.011
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 2.69,
+     "hit": true,
+     "end": [
+      1.471,
+      11.985
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 3.51,
+     "hit": true,
+     "end": [
+      0.018,
+      11.982
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.732,
+     "hit": true,
+     "end": [
+      -0.024,
+      10.546
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.498,
+     "hit": true,
+     "end": [
+      0.002,
+      9.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 50.0,
+    "capacity": 100.0,
+    "fraction": 0.5
+   },
+   "reward": {
+    "step": 0.93,
+    "total": 60.2,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 0.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 44,
+   "events": [],
+   "terminated": false,
+   "truncated": false,
+   "success": false,
+   "action": 0
+  },
+  {
+   "step": 57,
+   "robot": {
+    "x": 2,
+    "y": 10,
+    "orientation": "S",
+    "heading_deg": 180,
+    "velocity": 1,
+    "turn": 0
+   },
+   "rays": [
+    {
+     "angle_deg": -90.0,
+     "distance": 1.468,
+     "hit": true,
+     "end": [
+      3.968,
+      10.5
+     ]
+    },
+    {
+     "angle_deg": -67.5,
+     "distance": 1.69,
+     "hit": true,
+     "end": [
+      4.061,
+      11.147
+     ]
+    },
+    {
+     "angle_deg": -45.0,
+     "distance": 2.077,
+     "hit": true,
+     "end": [
+      3.968,
+      11.968
+     ]
+    },
+    {
+     "angle_deg": -22.5,
+     "distance": 1.721,
+     "hit": true,
+     "end": [
+      3.159,
+      12.09
+     ]
+    },
+    {
+     "angle_deg": 0.0,
+     "distance": 1.569,
+     "hit": true,
+     "end": [
+      2.5,
+      12.069
+     ]
+    },
+    {
+     "angle_deg": 22.5,
+     "distance": 1.539,
+     "hit": true,
+     "end": [
+      1.911,
+      11.922
+     ]
+    },
+    {
+     "angle_deg": 45.0,
+     "distance": 2.118,
+     "hit": true,
+     "end": [
+      1.002,
+      11.998
+     ]
+    },
+    {
+     "angle_deg": 67.5,
+     "distance": 2.742,
+     "hit": true,
+     "end": [
+      -0.033,
+      11.549
+     ]
+    },
+    {
+     "angle_deg": 90.0,
+     "distance": 2.487,
+     "hit": true,
+     "end": [
+      0.013,
+      10.5
+     ]
+    }
+   ],
+   "sensor_range": 6.0,
+   "beacons": [
+    {
+     "id": 1,
+     "x": 10,
+     "y": 1,
+     "visited": true
+    },
+    {
+     "id": 2,
+     "x": 10,
+     "y": 9,
+     "visited": true
+    }
+   ],
+   "battery": {
+    "value": 49.0,
+    "capacity": 100.0,
+    "fraction": 0.49
+   },
+   "reward": {
+    "step": 50.93,
+    "total": 111.13,
+    "breakdown": {
+     "progress": 1.0,
+     "beacon": 0.0,
+     "return": 50.0,
+     "time": -0.05,
+     "battery": -0.02,
+     "collision": 0.0,
+     "depletion": 0.0
+    }
+   },
+   "stage": 2,
+   "target": "base",
+   "visited": [
+    1,
+    2
+   ],
+   "collisions": 0,
+   "path_length": 45,
+   "events": [
+    "mission_complete"
+   ],
+   "terminated": true,
+   "truncated": false,
+   "success": true,
+   "action": 0
+  }
+ ]
+}

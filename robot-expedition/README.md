@@ -38,6 +38,61 @@ pip install -e ".[dev]"
 pytest
 ```
 
+## Ambiente (Fase 1)
+
+```python
+import gymnasium as gym
+import robot_expedition.envs  # registra RobotExpedition-v0
+
+env = gym.make("RobotExpedition-v0", config="configs/experimento_1.yaml")
+obs, info = env.reset(seed=0)
+obs, reward, terminated, truncated, info = env.step(0)
+info["reward_breakdown"]   # desglose por componente
+env.unwrapped.export_frame()  # estado completo en JSON para el visor/CLI
+```
+
+Mapa del experimento 1 (12 × 12 m; `#` obstáculo, `X` pasillo que cierra el incidente,
+`B` base, `^` robot):
+
+```
+. . . . . . # # . . . .
+. . . . . . # # . . 1 .
+. . # # . . # # . . . .
+. . # # . . # # . . . .
+. . . . . . . . . . . .
+. . . . . . . . . . . .
+# # # # . . . # # # X X
+. . . . . . . . . . . .
+. . . . . . . . . . . .
+. . . . # # . . . . 2 .
+B ^ B . # # . . . . . .
+B B B . # # . . . . . .
+```
+
+- **Acciones** `Discrete(5)`: 0 avanzar, 1 girar izquierda, 2 girar derecha, 3 retroceder, 4 quedarse.
+- **Observación** `Dict`: 9 rayos (−90° a +90°, con ruido), dirección (frente, derecha) y
+  distancia BFS al objetivo, orientación, velocidad y giro del último paso, batería
+  normalizada y etapa. Detalle en el docstring de
+  [`robot_expedition_env.py`](src/robot_expedition/envs/robot_expedition_env.py).
+- **Recompensa**: shaping por potencial con Φ = −(distancia BFS al objetivo actual + tramos
+  restantes), bono de baliza solo la primera vez y en orden, bono de retorno, y penalizaciones
+  de tiempo, batería, colisión y batería agotada. Una config con γ < 1 que permita farmear
+  quedándose quieto se rechaza al crear el ambiente.
+- **`DiscreteStateWrapper`**: (x, y, orientación, etapa, batería en k niveles) →
+  12·12·4·3·4 = **6 912 estados × 5 acciones = 34 560 valores Q** en el experimento 1.
+- **Incidente**: `incident: blocked_corridor` cierra el pasillo este; la ruta pasa de 37 a 45 m.
+- **Mapas aleatorios**: `map.seed: <entero>` genera un mapa válido (mismas reglas de separación
+  y ruta base → 1 → 2 → base comprobada con BFS).
+- **Episodios**: `EpisodeRecorder` guarda la lista de frames en `data/episodes/*.json`.
+  Hay ejemplos del controlador de referencia en `data/examples/`.
+
+Cinco transiciones manuales (observación → acción → física → recompensa → nueva observación):
+
+```bash
+python -m robot_expedition.demo
+pytest -s tests/test_five_transitions.py
+```
+
 ## CLI
 
 ```bash
