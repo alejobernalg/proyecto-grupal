@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import sys
 import time
+import webbrowser
 from pathlib import Path
 from typing import Optional
 
@@ -19,6 +20,8 @@ from robot_expedition.config import DEFAULT_CONFIG_PATH, ConfigError, Experiment
 from robot_expedition.envs import DiscreteStateWrapper, RobotExpeditionEnv
 from robot_expedition.envs.world import TARGETS
 from robot_expedition.export.episode import DEFAULT_EPISODES_DIR, EpisodeRecorder, load_episode
+from robot_expedition.export.live import DEFAULT_PORT as DEFAULT_LIVE_PORT
+from robot_expedition.export.live import LiveServer
 
 app = typer.Typer(help="ROBOT EXPEDITION: CLI del ambiente de RL.", no_args_is_help=True)
 console = Console()
@@ -76,7 +79,11 @@ def play(
     keys: Optional[str] = typer.Option(None, help="Juega una secuencia de teclas sin teclado, p. ej. 'wwdww'."),
     out_dir: Path = typer.Option(DEFAULT_EPISODES_DIR, help="Carpeta donde se guarda el episodio."),
     save: bool = typer.Option(True, "--save/--no-save", help="Guardar la partida como episodio JSON."),
-    live: bool = typer.Option(False, "--live", help="Enviar los frames al visor three.js (Fase 2)."),
+    live: bool = typer.Option(False, "--live", help="Enviar cada frame al visor three.js en tiempo real."),
+    live_port: int = typer.Option(DEFAULT_LIVE_PORT, help="Puerto WebSocket del modo --live."),
+    viewer_url: str = typer.Option("http://localhost:5173", help="URL del visor (npm run dev en viewer/)."),
+    open_viewer: bool = typer.Option(True, "--open/--no-open", help="Abrir el visor en el navegador con --live."),
+    delay: float = typer.Option(0.0, min=0.0, help="Pausa en segundos entre teclas de --keys (útil con --live)."),
 ) -> None:
     """Mueve el robot a mano: W avanzar, A/D girar, S retroceder, espacio quedarse, Q salir."""
     cfg = _load_or_exit(config)
@@ -85,8 +92,6 @@ def play(
     except ConfigError as err:
         _print_errors(err)
         raise typer.Exit(1)
-    if live:
-        console.print("[yellow]--live todavía no está disponible: el visor three.js llega en la Fase 2.[/]")
     if keys is None and not sys.stdin.isatty():
         console.print("[red]play necesita una terminal interactiva. Usa --keys para una secuencia de teclas.[/]")
         raise typer.Exit(2)
@@ -94,6 +99,18 @@ def play(
     env = EpisodeRecorder(base, out_dir=out_dir, auto_save=False, label="manual",
                           metadata={"agent": "human", "source": "robot-exp play", "seed": seed})
     env.reset(seed=seed)
+
+    server = None
+    if live:
+        try:
+            server = LiveServer(env.to_dict, port=live_port)
+        except OSError as err:
+            console.print(f"[red]No se pudo abrir el puerto {live_port} para --live: {err}[/]")
+            raise typer.Exit(1)
+        url = f"{viewer_url.rstrip('/')}/?live={server.url}"
+        console.print(f"[cyan]En vivo:[/] {server.url} · visor: [bold]{url}[/]")
+        if open_viewer:
+            webbrowser.open(url)
     map_dict = base.world.to_dict()
     trail = [base.pos]
     state = {"action": None, "quit": False}
@@ -112,11 +129,15 @@ def play(
             return False
         state["action"] = KEYMAP[key]
         *_, terminated, truncated, _ = env.step(KEYMAP[key])
+        if server is not None:
+            server.send_frame(env.frames[-1])
         if base.pos != trail[-1]:
             trail.append(base.pos)
         return terminated or truncated
 
     if keys is not None:
+        if server is not None and delay > 0:
+            time.sleep(max(delay, 1.0))  # da tiempo a que el visor se conecte
         console.print(view())
         for key in keys:
             if key.lower() not in KEYMAP and key.lower() not in QUIT_KEYS:
@@ -126,6 +147,8 @@ def play(
                 console.print(view())
             if done:
                 break
+            if delay:
+                time.sleep(delay)
     else:
         with Live(view(), console=console, screen=True, auto_refresh=False) as screen:
             done = False
@@ -139,6 +162,8 @@ def play(
             "truncated" if base.truncated else "keys_exhausted"
         path = env.save()
         console.print(f"Episodio guardado en [bold]{path}[/] ({len(env.frames)} frames)")
+    if server is not None:
+        server.close()
 
 
 @app.command()

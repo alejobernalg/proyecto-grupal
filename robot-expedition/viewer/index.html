@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Robot Expedition Viewer</title>
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+
+    <aside id="hud" class="panel">
+      <header>
+        <span class="brand">ROBOT EXPEDITION <span id="live-badge" hidden></span></span>
+        <span id="hud-episode" class="muted">sin episodio</span>
+      </header>
+      <dl>
+        <dt>Paso</dt><dd id="hud-step">—</dd>
+        <dt>Recompensa</dt><dd id="hud-total">—</dd>
+        <dt>Este paso</dt><dd id="hud-reward">—</dd>
+        <dt>Batería</dt>
+        <dd>
+          <div class="battery"><div id="hud-battery-fill"></div></div>
+          <span id="hud-battery" class="muted">—</span>
+        </dd>
+        <dt>Objetivo</dt><dd id="hud-target">—</dd>
+        <dt>Balizas</dt><dd id="hud-beacons">—</dd>
+        <dt>Colisiones</dt><dd id="hud-collisions">—</dd>
+        <dt>FPS</dt><dd id="hud-fps">—</dd>
+      </dl>
+      <div id="hud-breakdown"></div>
+      <div id="hud-events"></div>
+    </aside>
+
+    <div id="outcome" hidden></div>
+
+    <footer id="controls" class="panel">
+      <button id="btn-play" title="Play / pausa (espacio)">▶</button>
+      <select id="sel-speed" title="Velocidad">
+        <option value="0.25">0.25×</option>
+        <option value="0.5">0.5×</option>
+        <option value="1" selected>1×</option>
+        <option value="2">2×</option>
+        <option value="4">4×</option>
+      </select>
+      <input id="timeline" type="range" min="0" max="0" step="0.01" value="0" />
+      <span id="lbl-frame" class="muted">0 / 0</span>
+      <div class="buttons">
+        <button id="btn-view" title="Cambiar vista (V)">Vista: isométrica</button>
+        <button id="btn-guides" class="on" title="Rutas y guías (G)">Rutas y guías</button>
+        <button id="btn-light" title="Modo ligero (L)">Modo ligero</button>
+        <select id="sel-episode" title="Episodio"></select>
+        <label class="file" title="Abrir un episodio .json">
+          Abrir…<input id="file-input" type="file" accept=".json,application/json" />
+        </label>
+      </div>
+    </footer>
+
+    <div id="drop-hint" hidden>Suelta un episodio .json</div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

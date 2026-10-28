@@ -114,20 +114,43 @@ La vista del CLI solo dibuja frames exportados por el simulador; `replay` no eje
 | Comando | Fase | Estado |
 |---|---|---|
 | `robot-exp play` · `replay` · `validate-config` | 3 | listo |
-| `robot-exp play --live` | 2 | pendiente (necesita el visor) |
+| `robot-exp play --live` | 2 | listo (WebSocket al visor) |
 | `robot-exp train --config ...` | 4 | Entrena Q-learning |
 | `robot-exp watch --model models/<archivo>` | 4 | Muestra el agente entrenado |
 | `robot-exp evaluate` | 4 | Métricas con y sin incidente |
 
-## Visor three.js
+## Visor three.js (Marte)
 
-Se construye en la Fase 2. Uso previsto:
+Diorama 3D ambientado en Marte: regolito, dunas, montañas y mesetas con bruma, cráteres,
+rocas, polvo en suspensión, hábitat con paneles solares junto a la base, Fobos y Deimos.
+Los obstáculos son contenedores de carga (naranja), mesetas de arenisca (coral) y bloques
+de basalto (gris). Todo eso es decoración: el visor solo dibuja los frames que exporta el
+simulador y entre dos frames solo interpola el dibujo.
 
 ```bash
 cd viewer
 npm install
-npm run dev     # abre http://localhost:5173 y carga un episodio JSON
+npm run dev     # abre http://localhost:5173 con el primer episodio de ejemplo
 ```
+
+- El selector lista `data/examples/` y `data/episodes/` (tus partidas de `robot-exp play`).
+  También puedes arrastrar un `.json` a la ventana o usar **Abrir…**.
+- `?episode=examples/oracle_experimento_1.json&t=20&view=1` abre un episodio en un paso y vista.
+- Controles: play/pausa (espacio), ←/→ paso a paso, velocidad, línea de tiempo,
+  **Cambiar vista** (V: isométrica, cenital, seguimiento), **Rutas y guías** (G),
+  **Modo ligero** (L: sin sombras ni bloom).
+
+### En vivo: el visor sigue tus teclas del CLI
+
+Con el visor corriendo (`npm run dev`), en otra terminal:
+
+```bash
+robot-exp play --live
+```
+
+El CLI abre `http://localhost:5173/?live=ws://localhost:8765` en el navegador y envía cada
+frame por WebSocket. El robot 3D se mueve con cada tecla que pulses en la terminal.
+Si el visor se abre a mitad de partida, recibe el episodio completo hasta ese momento.
 
 ## Flujo de trabajo
 
