@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+
+# Datos generados: solo se versionan los ejemplos
+data/*
+!data/examples/
+!data/examples/**
+
+# Q-tables entrenadas (se versionan solo si se agregan explícitamente)
+models/*
+!models/.gitkeep
+
+# Visor
+viewer/node_modules/
+viewer/dist/
